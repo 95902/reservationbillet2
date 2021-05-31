@@ -74,12 +74,24 @@ class Voyages
      */
     private $tagsProducts;
 
+    /**
+     * @ORM\OneToMany(targetEntity=RelatedVoyage::class, mappedBy="voyage")
+     */
+    private $relatedVoyages;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ReviewsProduct::class, mappedBy="voyage")
+     */
+    private $reviewsProducts;
+
     public function __construct()
     {
         $this->destnation = new ArrayCollection();
         $this->hotel = new ArrayCollection();
         $this->voiture_loc = new ArrayCollection();
         $this->tagsProducts = new ArrayCollection();
+        $this->relatedVoyages = new ArrayCollection();
+        $this->reviewsProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -269,4 +281,69 @@ class Voyages
 
         return $this;
     }
+
+    /**
+     * @return Collection|RelatedVoyage[]
+     */
+    public function getRelatedVoyages(): Collection
+    {
+        return $this->relatedVoyages;
+    }
+
+    public function addRelatedVoyage(RelatedVoyage $relatedVoyage): self
+    {
+        if (!$this->relatedVoyages->contains($relatedVoyage)) {
+            $this->relatedVoyages[] = $relatedVoyage;
+            $relatedVoyage->setVoyage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRelatedVoyage(RelatedVoyage $relatedVoyage): self
+    {
+        if ($this->relatedVoyages->removeElement($relatedVoyage)) {
+            // set the owning side to null (unless already changed)
+            if ($relatedVoyage->getVoyage() === $this) {
+                $relatedVoyage->setVoyage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ReviewsProduct[]
+     */
+    public function getReviewsProducts(): Collection
+    {
+        return $this->reviewsProducts;
+    }
+
+    public function addReviewsProduct(ReviewsProduct $reviewsProduct): self
+    {
+        if (!$this->reviewsProducts->contains($reviewsProduct)) {
+            $this->reviewsProducts[] = $reviewsProduct;
+            $reviewsProduct->setVoyage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReviewsProduct(ReviewsProduct $reviewsProduct): self
+    {
+        if ($this->reviewsProducts->removeElement($reviewsProduct)) {
+            // set the owning side to null (unless already changed)
+            if ($reviewsProduct->getVoyage() === $this) {
+                $reviewsProduct->setVoyage(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->name;
+    }
+
 }
