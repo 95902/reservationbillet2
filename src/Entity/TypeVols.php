@@ -27,12 +27,7 @@ class TypeVols
     /**
      * @ORM\ManyToMany(targetEntity=Vols::class, mappedBy="type_vole")
      */
-    private $vols;
-
-    public function __construct()
-    {
-        $this->vols = new ArrayCollection();
-    }
+   
 
     public function getId(): ?int
     {
@@ -51,30 +46,5 @@ class TypeVols
         return $this;
     }
 
-    /**
-     * @return Collection|Vols[]
-     */
-    public function getVols(): Collection
-    {
-        return $this->vols;
-    }
 
-    public function addVol(Vols $vol): self
-    {
-        if (!$this->vols->contains($vol)) {
-            $this->vols[] = $vol;
-            $vol->addTypeVole($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVol(Vols $vol): self
-    {
-        if ($this->vols->removeElement($vol)) {
-            $vol->removeTypeVole($this);
-        }
-
-        return $this;
-    }
 }

@@ -29,15 +29,6 @@ class Compagnies
      */
     private $image;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Vols::class, mappedBy="compagny")
-     */
-    private $vols;
-
-    public function __construct()
-    {
-        $this->vols = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -68,30 +59,5 @@ class Compagnies
         return $this;
     }
 
-    /**
-     * @return Collection|Vols[]
-     */
-    public function getVols(): Collection
-    {
-        return $this->vols;
-    }
 
-    public function addVol(Vols $vol): self
-    {
-        if (!$this->vols->contains($vol)) {
-            $this->vols[] = $vol;
-            $vol->addCompagny($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVol(Vols $vol): self
-    {
-        if ($this->vols->removeElement($vol)) {
-            $vol->removeCompagny($this);
-        }
-
-        return $this;
-    }
 }
