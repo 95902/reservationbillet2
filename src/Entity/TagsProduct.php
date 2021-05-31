@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\TypeVolsRepository;
+use App\Repository\TagsProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=TypeVolsRepository::class)
+ * @ORM\Entity(repositoryClass=TagsProductRepository::class)
  */
-class TypeVols
+class TagsProduct
 {
     /**
      * @ORM\Id
@@ -25,19 +25,14 @@ class TypeVols
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Vols::class, mappedBy="type_vol")
+     * @ORM\ManyToMany(targetEntity=Voyages::class, inversedBy="tagsProducts")
      */
-    private $vols;
+    private $voyage;
 
     public function __construct()
     {
-        $this->vols = new ArrayCollection();
+        $this->voyage = new ArrayCollection();
     }
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Vols::class, mappedBy="type_vole")
-     */
-   
 
     public function getId(): ?int
     {
@@ -57,31 +52,26 @@ class TypeVols
     }
 
     /**
-     * @return Collection|Vols[]
+     * @return Collection|Voyages[]
      */
-    public function getVols(): Collection
+    public function getVoyage(): Collection
     {
-        return $this->vols;
+        return $this->voyage;
     }
 
-    public function addVol(Vols $vol): self
+    public function addVoyage(Voyages $voyage): self
     {
-        if (!$this->vols->contains($vol)) {
-            $this->vols[] = $vol;
-            $vol->addTypeVol($this);
+        if (!$this->voyage->contains($voyage)) {
+            $this->voyage[] = $voyage;
         }
 
         return $this;
     }
 
-    public function removeVol(Vols $vol): self
+    public function removeVoyage(Voyages $voyage): self
     {
-        if ($this->vols->removeElement($vol)) {
-            $vol->removeTypeVol($this);
-        }
+        $this->voyage->removeElement($voyage);
 
         return $this;
     }
-
-
 }

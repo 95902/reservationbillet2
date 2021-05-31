@@ -69,11 +69,17 @@ class Voyages
      */
     private $voiture_loc;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=TagsProduct::class, mappedBy="voyage")
+     */
+    private $tagsProducts;
+
     public function __construct()
     {
         $this->destnation = new ArrayCollection();
         $this->hotel = new ArrayCollection();
         $this->voiture_loc = new ArrayCollection();
+        $this->tagsProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -233,6 +239,33 @@ class Voyages
     public function removeVoitureLoc(AgenceLocationVoitures $voitureLoc): self
     {
         $this->voiture_loc->removeElement($voitureLoc);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TagsProduct[]
+     */
+    public function getTagsProducts(): Collection
+    {
+        return $this->tagsProducts;
+    }
+
+    public function addTagsProduct(TagsProduct $tagsProduct): self
+    {
+        if (!$this->tagsProducts->contains($tagsProduct)) {
+            $this->tagsProducts[] = $tagsProduct;
+            $tagsProduct->addVoyage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTagsProduct(TagsProduct $tagsProduct): self
+    {
+        if ($this->tagsProducts->removeElement($tagsProduct)) {
+            $tagsProduct->removeVoyage($this);
+        }
 
         return $this;
     }

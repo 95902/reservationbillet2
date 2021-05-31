@@ -44,11 +44,23 @@ class Destinations
      */
     private $agenceLocationVoitures;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Vols::class, mappedBy="Ville_depart")
+     */
+    private $vols;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Vols::class, mappedBy="ville_Arrive")
+     */
+    private $vol_arrive;
+
     public function __construct()
     {
         $this->voyages = new ArrayCollection();
         $this->hotels = new ArrayCollection();
         $this->agenceLocationVoitures = new ArrayCollection();
+        $this->vols = new ArrayCollection();
+        $this->vol_arrive = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -156,6 +168,66 @@ class Destinations
     {
         if ($this->agenceLocationVoitures->removeElement($agenceLocationVoiture)) {
             $agenceLocationVoiture->removePay($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Vols[]
+     */
+    public function getVols(): Collection
+    {
+        return $this->vols;
+    }
+
+    public function addVol(Vols $vol): self
+    {
+        if (!$this->vols->contains($vol)) {
+            $this->vols[] = $vol;
+            $vol->setVilleDepart($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVol(Vols $vol): self
+    {
+        if ($this->vols->removeElement($vol)) {
+            // set the owning side to null (unless already changed)
+            if ($vol->getVilleDepart() === $this) {
+                $vol->setVilleDepart(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Vols[]
+     */
+    public function getVolArrive(): Collection
+    {
+        return $this->vol_arrive;
+    }
+
+    public function addVolArrive(Vols $volArrive): self
+    {
+        if (!$this->vol_arrive->contains($volArrive)) {
+            $this->vol_arrive[] = $volArrive;
+            $volArrive->setVilleArrive($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVolArrive(Vols $volArrive): self
+    {
+        if ($this->vol_arrive->removeElement($volArrive)) {
+            // set the owning side to null (unless already changed)
+            if ($volArrive->getVilleArrive() === $this) {
+                $volArrive->setVilleArrive(null);
+            }
         }
 
         return $this;
