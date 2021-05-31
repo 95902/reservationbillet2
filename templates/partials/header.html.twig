@@ -1,0 +1,40 @@
+    <div class="wrap">
+        <header id="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button id="primary-nav-button" type="button">Menu</button>
+                        <a href="index.html"><div class="logo">
+                            <img src="/img/logo.png" alt="Venue Logo">
+                        </div></a>
+                        <nav id="primary-nav" class="dropdown cf">
+                            <ul class="dropdown menu">
+                                <li class='active'><a href="{{ path('home') }}">Accueil</a></li>
+
+                                <li><a href="packages.html">Packages</a></li>
+
+                                <li><a href="blog.html">Blog</a></li>
+
+                                <li>
+                                    <a href="#">About</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="about-us.html">About Us</a></li>
+                                        <li><a href="testimonials.html">Testimonials</a></li>
+                                        <li><a href="terms.html">Terms</a></li>
+                                    </ul>
+                                </li>
+
+                                <li><a href="contact.html">Contact Us</a></li>
+                                {% if app.user %}
+                                    <li><a href="{{ path('app_logout') }}"><i class="ti-user"></i><span>Se déconnecter</span></a></li>
+                                {% else %}
+                                 <li><a href="{{ path('app_login') }}"><i class="ti-user"></i><span>Se connecter</span></a></li>
+                                 <li><a href="{{ path('app_register') }}"><i class="fas fa-sign-in-alt"></i><span>S'enregistrer</span></a></li>
+                                {% endif %}
+                            </ul>
+                        </nav><!-- / #primary-nav -->
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
