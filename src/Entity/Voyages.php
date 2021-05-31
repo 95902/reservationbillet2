@@ -59,9 +59,21 @@ class Voyages
      */
     private $destnation;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Hotels::class, inversedBy="voyages")
+     */
+    private $hotel;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=AgenceLocationVoitures::class, inversedBy="voyages")
+     */
+    private $voiture_loc;
+
     public function __construct()
     {
         $this->destnation = new ArrayCollection();
+        $this->hotel = new ArrayCollection();
+        $this->voiture_loc = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -173,6 +185,54 @@ class Voyages
     public function removeDestnation(Destinations $destnation): self
     {
         $this->destnation->removeElement($destnation);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Hotels[]
+     */
+    public function getHotel(): Collection
+    {
+        return $this->hotel;
+    }
+
+    public function addHotel(Hotels $hotel): self
+    {
+        if (!$this->hotel->contains($hotel)) {
+            $this->hotel[] = $hotel;
+        }
+
+        return $this;
+    }
+
+    public function removeHotel(Hotels $hotel): self
+    {
+        $this->hotel->removeElement($hotel);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AgenceLocationVoitures[]
+     */
+    public function getVoitureLoc(): Collection
+    {
+        return $this->voiture_loc;
+    }
+
+    public function addVoitureLoc(AgenceLocationVoitures $voitureLoc): self
+    {
+        if (!$this->voiture_loc->contains($voitureLoc)) {
+            $this->voiture_loc[] = $voitureLoc;
+        }
+
+        return $this;
+    }
+
+    public function removeVoitureLoc(AgenceLocationVoitures $voitureLoc): self
+    {
+        $this->voiture_loc->removeElement($voitureLoc);
 
         return $this;
     }

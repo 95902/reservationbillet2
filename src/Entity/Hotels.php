@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\HotelsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -51,6 +53,22 @@ class Hotels
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isPiscine;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Destinations::class, inversedBy="hotels")
+     */
+    private $destination;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Voyages::class, mappedBy="hotel")
+     */
+    private $voyages;
+
+    public function __construct()
+    {
+        $this->destination = new ArrayCollection();
+        $this->voyages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,6 +155,57 @@ class Hotels
     public function setIsPiscine(?bool $isPiscine): self
     {
         $this->isPiscine = $isPiscine;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Destinations[]
+     */
+    public function getDestination(): Collection
+    {
+        return $this->destination;
+    }
+
+    public function addDestination(Destinations $destination): self
+    {
+        if (!$this->destination->contains($destination)) {
+            $this->destination[] = $destination;
+        }
+
+        return $this;
+    }
+
+    public function removeDestination(Destinations $destination): self
+    {
+        $this->destination->removeElement($destination);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Voyages[]
+     */
+    public function getVoyages(): Collection
+    {
+        return $this->voyages;
+    }
+
+    public function addVoyage(Voyages $voyage): self
+    {
+        if (!$this->voyages->contains($voyage)) {
+            $this->voyages[] = $voyage;
+            $voyage->addHotel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVoyage(Voyages $voyage): self
+    {
+        if ($this->voyages->removeElement($voyage)) {
+            $voyage->removeHotel($this);
+        }
 
         return $this;
     }

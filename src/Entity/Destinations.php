@@ -34,9 +34,21 @@ class Destinations
      */
     private $voyages;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Hotels::class, mappedBy="destination")
+     */
+    private $hotels;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=AgenceLocationVoitures::class, mappedBy="Pays")
+     */
+    private $agenceLocationVoitures;
+
     public function __construct()
     {
         $this->voyages = new ArrayCollection();
+        $this->hotels = new ArrayCollection();
+        $this->agenceLocationVoitures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -90,6 +102,60 @@ class Destinations
     {
         if ($this->voyages->removeElement($voyage)) {
             $voyage->removeDestnation($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Hotels[]
+     */
+    public function getHotels(): Collection
+    {
+        return $this->hotels;
+    }
+
+    public function addHotel(Hotels $hotel): self
+    {
+        if (!$this->hotels->contains($hotel)) {
+            $this->hotels[] = $hotel;
+            $hotel->addDestination($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHotel(Hotels $hotel): self
+    {
+        if ($this->hotels->removeElement($hotel)) {
+            $hotel->removeDestination($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AgenceLocationVoitures[]
+     */
+    public function getAgenceLocationVoitures(): Collection
+    {
+        return $this->agenceLocationVoitures;
+    }
+
+    public function addAgenceLocationVoiture(AgenceLocationVoitures $agenceLocationVoiture): self
+    {
+        if (!$this->agenceLocationVoitures->contains($agenceLocationVoiture)) {
+            $this->agenceLocationVoitures[] = $agenceLocationVoiture;
+            $agenceLocationVoiture->addPay($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAgenceLocationVoiture(AgenceLocationVoitures $agenceLocationVoiture): self
+    {
+        if ($this->agenceLocationVoitures->removeElement($agenceLocationVoiture)) {
+            $agenceLocationVoiture->removePay($this);
         }
 
         return $this;
