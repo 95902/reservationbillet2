@@ -57,16 +57,10 @@
                     <br>
                     <div class="cart_extra">
                        
-                        <div class="cart-product-quantity">
-                            <div class="quantity">
-                                <input type="button" value="-" class="minus">
-                                <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
-                                <input type="button" value="+" class="plus">
-                            </div>
-                        </div>
+                        
                         
                         <div class="cart_btn">
-                            <button class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> Add to cart</button>
+                            <a href='{{ path('cart_add',{'id':voyage.id}) }}' class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> Add to cart</a>
                             <a class="add_compare" href="#"><i class="icon-shuffle"></i></a>
                             <a class="add_wishlist" href="#"><i class="icon-heart"></i></a>
                         </div>
@@ -176,7 +170,7 @@
                                                      <p>
                                                      
                                                            
-                                                              {{ hotels.prix_nuit }}
+                                                              {# {{ hotels.prix_nuit }} #}
                                                             
                                                         
                                                      {# {% for voyage in hotel.voyages %}
