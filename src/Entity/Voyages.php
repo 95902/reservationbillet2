@@ -96,6 +96,11 @@ class Voyages
      */
     private $slug;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Vols::class, inversedBy="voyages")
+     */
+    private $vol;
+
     public function __construct()
     {
         $this->destnation = new ArrayCollection();
@@ -105,6 +110,7 @@ class Voyages
         $this->relatedVoyages = new ArrayCollection();
         $this->reviewsProducts = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->vol = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -366,6 +372,30 @@ class Voyages
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Vols[]
+     */
+    public function getVol(): Collection
+    {
+        return $this->vol;
+    }
+
+    public function addVol(Vols $vol): self
+    {
+        if (!$this->vol->contains($vol)) {
+            $this->vol[] = $vol;
+        }
+
+        return $this;
+    }
+
+    public function removeVol(Vols $vol): self
+    {
+        $this->vol->removeElement($vol);
 
         return $this;
     }

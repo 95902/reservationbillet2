@@ -28,20 +28,21 @@ class VoyagesCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
-            SlugField::new('slug')->setTargetFieldName('name'),
+            SlugField::new('slug')->setTargetFieldName('name')->hideOnIndex(),
             TextEditorField::new('description'),
             IntegerField::new('duree'),
             TextField::new('tags'),
             IntegerField::new('quantite'),
             MoneyField::new('prix')->setCurrency('USD'),
-            BooleanField::new('isSpecialOffert'),
+            BooleanField::new('isSpecialOffert', 'Offre spéciale'),
             AssociationField::new('destnation'),
+            AssociationField::new('vol'),
             AssociationField::new('hotel'),
             AssociationField::new('voiture_loc'),
             ImageField::new('image')->setBasePath('/assets/upload/voyages/')
                                     ->setUploadDir('/public/assets/upload/voyages/')
-                                    ->setUploadedFileNamePattern('[randomhash]')
-                                    ->setRequired(false)
+                                    // ->setUploadedFileNamePattern('[randomhash].[extend]')
+                                    // ->setRequired(false)
                                    
         ];
     }

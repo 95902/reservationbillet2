@@ -6,6 +6,7 @@ use App\Entity\Vols;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class VolsCrudController extends AbstractCrudController
 {
@@ -19,6 +20,7 @@ class VolsCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
+            TextField::new('name'),
             AssociationField::new('Ville_depart'),
             AssociationField::new('ville_Arrive'),
             AssociationField::new('compagny'),

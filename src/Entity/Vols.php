@@ -41,10 +41,21 @@ class Vols
      */
     private $type_vol;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Voyages::class, mappedBy="vol")
+     */
+    private $voyages;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
     public function __construct()
     {
         $this->compagny = new ArrayCollection();
         $this->type_vol = new ArrayCollection();
+        $this->voyages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -120,6 +131,49 @@ class Vols
     public function removeTypeVol(TypeVols $typeVol): self
     {
         $this->type_vol->removeElement($typeVol);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Voyages[]
+     */
+    public function getVoyages(): Collection
+    {
+        return $this->voyages;
+    }
+
+    public function addVoyage(Voyages $voyage): self
+    {
+        if (!$this->voyages->contains($voyage)) {
+            $this->voyages[] = $voyage;
+            $voyage->addVol($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVoyage(Voyages $voyage): self
+    {
+        if ($this->voyages->removeElement($voyage)) {
+            $voyage->removeVol($this);
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
