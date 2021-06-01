@@ -1,0 +1,27 @@
+<div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="featured-item">
+        <div class="thumb">
+            <div class="thumb-img">
+                <img src=" /assets/upload/voyages/{{voyage.image}}" alt="">
+            </div>
+
+            <div class="overlay-content">
+                <strong title="Available"><i class="fa fa-calendar"></i> {{ voyage.name }}</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                <strong title="Nights"><i class="fa fa-cube"></i> {{ voyage.duree}}nights</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                <strong title="Flight included"><i class="fa fa-plane"></i> {{ voyage.name }}</strong>
+            </div>
+        </div>
+
+        <div class="down-content">
+            <h4>{{ voyage.name }} </h4>
+
+            {# <p>{{ voyage.description }}</p> #}
+
+            <p><span><strong><sup>$</sup>{{ voyage.prix /100 }} </strong> - <strong><sup>$</sup>{{ voyage.prix /100 }}</strong></span></p>
+
+            <div class="text-button">
+                <a href="package-details.html">View More</a>
+            </div>
+        </div>
+    </div>
+</div>

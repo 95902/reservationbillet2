@@ -39,6 +39,7 @@ class Compagnies
         $this->vols = new ArrayCollection();
     }
 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -94,4 +95,9 @@ class Compagnies
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->name;
+    }
+
 }

@@ -25,7 +25,7 @@ class TypeVols
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Vols::class, mappedBy="type_vole")
+     * @ORM\ManyToMany(targetEntity=Vols::class, mappedBy="type_vol")
      */
     private $vols;
 
@@ -33,6 +33,8 @@ class TypeVols
     {
         $this->vols = new ArrayCollection();
     }
+
+
 
     public function getId(): ?int
     {
@@ -63,7 +65,7 @@ class TypeVols
     {
         if (!$this->vols->contains($vol)) {
             $this->vols[] = $vol;
-            $vol->addTypeVole($this);
+            $vol->addTypeVol($this);
         }
 
         return $this;
@@ -72,9 +74,14 @@ class TypeVols
     public function removeVol(Vols $vol): self
     {
         if ($this->vols->removeElement($vol)) {
-            $vol->removeTypeVole($this);
+            $vol->removeTypeVol($this);
         }
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->name;
+    }
+
 }
