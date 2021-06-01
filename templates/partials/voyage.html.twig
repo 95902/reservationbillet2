@@ -6,21 +6,37 @@
             </div>
 
             <div class="overlay-content">
-                <strong title="Available"><i class="fa fa-calendar"></i> {{ voyage.name }}</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                <strong title="Available"><i class="fa fa-calendar"></i>
+                {% for destnation in  voyage.destnation %}
+                  {{destnation}}  
+                {% endfor %}
+                 
+                
+                </strong> &nbsp;&nbsp;&nbsp;&nbsp;
                 <strong title="Nights"><i class="fa fa-cube"></i> {{ voyage.duree}}nights</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                <strong title="Flight included"><i class="fa fa-plane"></i> {{ voyage.name }}</strong>
+                <strong title="Flight included"><i class="fa fa-plane"></i> 
+                 {% for vol in  voyage.vol %}
+
+                  {{vol}}  
+                {% endfor %}
+                </strong>
             </div>
         </div>
 
         <div class="down-content">
             <h4>{{ voyage.name }} </h4>
 
-            {# <p>{{ voyage.description }}</p> #}
+             <p>{{ voyage.description |striptags|slice(0, 40) }}</p>
 
             <p><span><strong><sup>$</sup>{{ voyage.prix /100 }} </strong> - <strong><sup>$</sup>{{ voyage.prix /100 }}</strong></span></p>
-
+                                                        
+                                                          {% for hotels in  voyage.hotel %}
+                                                           
+                                                              {{ hotels.description | raw  }}
+                                                            
+                                                        {% endfor %}
             <div class="text-button">
-                <a href="package-details.html">View More</a>
+                <a href="{{path('voyage_details',{'slug':voyage.slug}) }}">View More</a>
             </div>
         </div>
     </div>
