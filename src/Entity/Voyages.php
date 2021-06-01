@@ -69,10 +69,7 @@ class Voyages
      */
     private $voiture_loc;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=TagsProduct::class, mappedBy="voyage")
-     */
-    private $tagsProducts;
+    
 
     /**
      * @ORM\OneToMany(targetEntity=RelatedVoyage::class, mappedBy="voyage")
@@ -84,6 +81,21 @@ class Voyages
      */
     private $reviewsProducts;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $tags;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->destnation = new ArrayCollection();
@@ -92,6 +104,7 @@ class Voyages
         $this->tagsProducts = new ArrayCollection();
         $this->relatedVoyages = new ArrayCollection();
         $this->reviewsProducts = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -255,32 +268,7 @@ class Voyages
         return $this;
     }
 
-    /**
-     * @return Collection|TagsProduct[]
-     */
-    public function getTagsProducts(): Collection
-    {
-        return $this->tagsProducts;
-    }
-
-    public function addTagsProduct(TagsProduct $tagsProduct): self
-    {
-        if (!$this->tagsProducts->contains($tagsProduct)) {
-            $this->tagsProducts[] = $tagsProduct;
-            $tagsProduct->addVoyage($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTagsProduct(TagsProduct $tagsProduct): self
-    {
-        if ($this->tagsProducts->removeElement($tagsProduct)) {
-            $tagsProduct->removeVoyage($this);
-        }
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection|RelatedVoyage[]
@@ -344,6 +332,42 @@ class Voyages
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getTags(): ?string
+    {
+        return $this->tags;
+    }
+
+    public function setTags(?string $tags): self
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 
 }

@@ -34,10 +34,7 @@ class TypeVols
         $this->vols = new ArrayCollection();
     }
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Vols::class, mappedBy="type_vole")
-     */
-   
+
 
     public function getId(): ?int
     {
@@ -82,6 +79,9 @@ class TypeVols
 
         return $this;
     }
-
+    public function __toString()
+    {
+        return $this->name;
+    }
 
 }

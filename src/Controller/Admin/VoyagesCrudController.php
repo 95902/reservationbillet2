@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -27,8 +28,10 @@ class VoyagesCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
+            SlugField::new('slug')->setTargetFieldName('name'),
             TextEditorField::new('description'),
             IntegerField::new('duree'),
+            TextField::new('tags'),
             IntegerField::new('quantite'),
             MoneyField::new('prix')->setCurrency('USD'),
             BooleanField::new('isSpecialOffert'),
