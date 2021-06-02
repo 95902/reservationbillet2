@@ -43,22 +43,17 @@
                         <h2><strong class="text-primary">{{ voyage.prix /100 }}</strong></h2>
                         <h2><small><i class="fa fa-map-marker"></i> 
                          {% for hotel in  voyage.hotel %}
-                         {{hotel}} ,{{hotel}}   
+                         {{hotel}} ,  
                         {% endfor %}
-                         6 Regeneration Road, SE16 2NX, London
+                        
                          </small></h2>
 
                   </div>
 
                   <div class="col-md-6 col-xs-12">
-                  
-                    
-
                     <br>
                     <div class="cart_extra">
-                       
-                        
-                        
+                                                                 
                         <div class="cart_btn">
                             <a href='{{ path('cart_add',{'id':voyage.id}) }}' class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> Add to cart</a>
                             <a class="add_compare" href="#"><i class="icon-shuffle"></i></a>
@@ -147,12 +142,10 @@
                                                            
                                                               {{ hotels.description | raw  }}
                                                             
-                                                        {% endfor %}
-                                                          {# {% for hotel in  voyage.hotel %}
-                                                            {% for voyage in hotel.voyages %}
-                                                              {{ voyage.description | raw }}
-                                                            {% endfor %}
-                                                        {% endfor %} #}
+                                                        
+                                                          
+                                                            
+                                                        {% endfor %} 
                                                      </p>
                                                 </div>
                                            </div>
