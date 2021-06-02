@@ -31,6 +31,10 @@ class HomeController extends AbstractController
             'hotels'=>$hotels,
         ]);
     }
+
+    
+     
+
     /**
     * @Route("/voyage/{slug}",name="voyage_details")
     */
@@ -46,4 +50,5 @@ class HomeController extends AbstractController
             
         ]);    
     }
+
 }
