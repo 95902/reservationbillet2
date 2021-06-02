@@ -10,6 +10,7 @@ use App\Entity\TypeVols;
 use App\Entity\Voitures;
 use App\Entity\Vols;
 use App\Entity\Voyages;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -43,6 +44,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Destinations', 'fas fa-list', Destinations::class);
         yield MenuItem::linkToCrud('Compagnies', 'fas fa-list', Compagnies::class);
         yield MenuItem::linkToCrud('Ag location', 'fas fa-list', AgenceLocationVoitures::class);
+        yield MenuItem::linkToCrud('User', 'fas fa-list', User::class);
         
     }
 }
