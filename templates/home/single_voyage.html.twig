@@ -1,0 +1,391 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Voyage {% endblock %}
+
+{% block body %}
+{{ include("partials/title_section.html.twig",{'name':'Voyage détails'}) }}
+
+
+    <section class="banner banner-secondary" id="top" style="background-image: url(/assets/upload/voyages/{{voyage.image}});">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="banner-caption">
+                        <div class="line-dec"></div>
+                        <h2>{{voyage.name}}</h2>
+
+                        <h4> <i class="fa fa-calendar"></i> 
+                        {% for destnation in  voyage.destnation %}
+                         {{destnation}}  
+                        {% endfor %} 
+                        &nbsp;&nbsp; 
+                        <i class="fa fa-cube"></i> {{ voyage.duree}} nights &nbsp;&nbsp;
+
+                         <i class="fa fa-plane"></i>{% for vol in  voyage.vol %}
+                 
+                          {{vol}}  
+                        {% endfor %} </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section class="featured-places">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-6 col-xs-12">
+                    <div>
+                      <img src="img/product-1-720x480.jpg" alt="" class="img-responsive wc-image">
+                    </div>
+                    <br>
+                        <h2><strong class="text-primary">{{ voyage.prix /100 }}</strong></h2>
+                        <h2><small><i class="fa fa-map-marker"></i> 
+                         {% for hotel in  voyage.hotel %}
+                         {{hotel}} ,{{hotel}}   
+                        {% endfor %}
+                         6 Regeneration Road, SE16 2NX, London
+                         </small></h2>
+
+                  </div>
+
+                  <div class="col-md-6 col-xs-12">
+                  
+                    
+
+                    <br>
+                    <div class="cart_extra">
+                       
+                        
+                        
+                        <div class="cart_btn">
+                            <a href='{{ path('cart_add',{'id':voyage.id}) }}' class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> Add to cart</a>
+                            <a class="add_compare" href="#"><i class="icon-shuffle"></i></a>
+                            <a class="add_wishlist" href="#"><i class="icon-heart"></i></a>
+                        </div>
+                    </div>
+                     <hr />
+                    <ul class="product-meta">
+                        <li>Destination: <a href="#">
+                          {% for destnation in  voyage.destnation %}
+                            {{destnation}}  
+                          {% endfor %}
+                        </a></li>
+                        <li>Tags: {{ voyage.tags}} </li>
+                    </ul>
+                    <div class="row">
+                      <div class="col-sm-4 col-xs-6">
+                        <div class="form-group">
+                            <img src="img/product-1-720x480.jpg" alt="" class="img-responsive">
+                        </div>
+                      </div>
+                      <div class="col-sm-4 col-xs-6">
+                        <div class="form-group">
+                            <img src="img/product-2-720x480.jpg" alt="" class="img-responsive">
+                        </div>
+                      </div>
+                      <div class="col-sm-4 col-xs-6">
+                        <div class="form-group">
+                            <img src="img/product-3-720x480.jpg" alt="" class="img-responsive">
+                        </div>
+                      </div>
+
+                      <div class="col-sm-4 col-xs-6">
+                        <div class="form-group">
+                            <img src="img/product-4-720x480.jpg" alt="" class="img-responsive">
+                        </div>
+                      </div>
+                      <div class="col-sm-4 col-xs-6">
+                        <div class="form-group">
+                            <img src="img/product-5-720x480.jpg" alt="" class="img-responsive">
+                        </div>
+                      </div>
+                      <div class="col-sm-4 col-xs-6">
+                        <div class="form-group">
+                            <img src="img/product-6-720x480.jpg" alt="" class="img-responsive">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <form action="#" method="post" class="form">
+                    <div class="accordions">
+                        <ul class="accordion">
+                            <li>
+                                <a class="accordion-trigger">Description</a>
+                                
+                                <div class="accordion-content">
+                                    <p>{{ voyage.description | raw }}</p>
+{# 
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium esse eos qui optio rerum nam quae libero pariatur commodi blanditiis voluptatibus assumenda earum magni nisi numquam, ad, dolorum fugit expedita.</p>
+
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum quas, vel accusamus nisi, voluptatum necessitatibus facilis voluptatibus architecto! Excepturi voluptas tempora omnis aliquam doloremque culpa, ipsum nulla error tenetur assumenda.</p>
+
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed similique nam repellendus commodi eaque dolor numquam sint accusantium minus, reiciendis consequuntur itaque, qui. Qui officiis omnis nisi rem fuga adipisci, delectus, quidem ipsam ducimus tempora nihil facilis provident facere. Nemo.</p> #}
+                                </div>
+                            </li>
+                            <li>
+                                <a class="accordion-trigger">Hotel: 
+                                {% for hotel in  voyage.hotel %}
+                                      {{ hotel }}
+                                {% endfor %}
+                                </a>
+                                <div class="accordion-content">
+                                    <ul class="list-group list-group-no-border">
+                                      <li class="list-group-item">
+                                           <div class="row">
+                                                <div class="col-md-2 col-sm-3">
+                                                     <p class="pjVpProductPolicyTitle">
+                                                          <strong>Description</strong>
+                                                     </p>
+                                                </div>
+                                                <div class="col-md-10 col-sm-9">
+                                                     <p>
+                                                      {% for hotels in  voyage.hotel %}
+                                                           
+                                                              {{ hotels.description | raw  }}
+                                                            
+                                                        {% endfor %}
+                                                          {# {% for hotel in  voyage.hotel %}
+                                                            {% for voyage in hotel.voyages %}
+                                                              {{ voyage.description | raw }}
+                                                            {% endfor %}
+                                                        {% endfor %} #}
+                                                     </p>
+                                                </div>
+                                           </div>
+                                      </li>
+
+                                      <li class="list-group-item">
+                                           <div class="row">
+                                                <div class="col-md-2 col-sm-3">
+                                                     <p>
+                                                          <strong>Prix nuité</strong>
+                                                     </p>
+                                                </div>
+
+                                                <div class="col-md-10 col-sm-9">
+                                                     <p>
+                                                     
+                                                           
+                                                              {# {{ hotels.prix_nuit }} #}
+                                                            
+                                                        
+                                                     {# {% for voyage in hotel.voyages %}
+                                                          {% for hotel in  voyage.hotel %}
+                                                            
+                                                              {{ hotel.description  }}
+                                                            {% endfor %}
+                                                        {% endfor %} #}
+                                                     </p>
+                                                </div>
+                                           </div>
+                                      </li>
+
+                                      <li class="list-group-item">
+                                           <div class="row">
+                                                <div class="col-md-2 col-sm-3">
+                                                     <p>
+                                                          <strong>Pets</strong>
+                                                     </p>
+                                                </div>
+                                                <div class="col-md-10 col-sm-9">
+                                                     <p>
+                                                          Not allowed
+                                                     </p>
+                                                </div>
+                                           </div>
+                                      </li>
+
+                                      <li class="list-group-item">
+                                           <div class="row">
+                                                <div class="col-md-2 col-sm-3">
+                                                     <p>
+                                                          <strong>Policies</strong>
+                                                     </p>
+                                                </div>
+                                                <div class="col-md-10 col-sm-9">
+                                                     <div>
+                                                          <p>
+                                                               Donec dapibus semper sem, ac ultrices sem sagittis ut. Donec sit amet erat elit, sed pellentesque odio. In enim ligula, euismod a adipiscing in, laoreet quis turpis. Ut accumsan dignissim rutrum. <br>
+                                                                Donec dapibus semper sem, ac ultrices sem sagittis ut. Donec sit amet erat elit, sed pellentesque odio. In enim ligula, euismod a adipiscing in, laoreet quis turpis. Ut accumsan dignissim rutrum. <br>
+                                                          </p>
+                                                     </div>
+                                                </div>
+                                           </div>
+                                      </li>
+                                      
+                                      <li class="list-group-item">
+                                           <div class="row">
+                                                <div class="col-md-2 col-sm-3">
+                                                     <p>
+                                                          <strong>Fees</strong>
+                                                     </p>
+                                                </div>
+
+                                                <div class="col-md-10 col-sm-9">
+                                                     <div>
+                                                          <p>
+                                                               Donec dapibus semper sem, ac ultrices sem sagittis ut. Donec sit amet erat elit, sed pellentesque odio. In enim ligula, euismod a adipiscing in, laoreet quis turpis. Ut accumsan dignissim rutrum. <br>
+                                                                Donec dapibus semper sem, ac ultrices sem sagittis ut. Donec sit amet erat elit, sed pellentesque odio. In enim ligula, euismod a adipiscing in, laoreet quis turpis. Ut accumsan dignissim rutrum. <br>
+                                                          </p>
+                                                     </div>
+                                                </div>
+                                           </div>
+                                      </li>
+                                 </ul>
+                                </div>
+                            </li>
+
+                            <li>
+                                <a class="accordion-trigger">Map</a>
+                                <div class="accordion-content">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11628.751733874766!2d27.948302749999996!3d43.22651925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbg!4v1592215682178!5m2!1sen!2sbg" width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="accordion-trigger">Enquiry &amp; Contact Details</a>
+
+                                <div class="accordion-content">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="row">
+                                              <div class="col-sm-6">
+                                                <fieldset>
+                                                  <input name="name" type="text" class="form-control" id="name" placeholder="Name" required="">
+                                                </fieldset>
+                                              </div>
+
+                                              <div class="col-sm-6">
+                                                <fieldset>
+                                                  <input name="email" type="email" class="form-control" id="email" placeholder="Email" required="">
+                                                </fieldset>
+                                              </div>
+
+                                              <div class="col-sm-6">
+                                                <fieldset>
+                                                  <input name="phone" type="text" class="form-control" id="phone" placeholder="Phone" required="">
+                                                </fieldset>
+                                              </div>
+
+                                              <div class="col-sm-3">
+                                                <fieldset>
+                                                  <input name="date1" type="text" class="form-control" id="date1" placeholder="From 16.06.2020" required="">
+                                                </fieldset>
+                                              </div>
+
+                                              <div class="col-sm-3">
+                                                <fieldset>
+                                                  <input name="date2" type="text" class="form-control" id="date2" placeholder="To 16.06.2020" required="">
+                                                </fieldset>
+                                              </div>
+                                              
+                                              <div class="col-lg-12">
+                                                <fieldset>
+                                                  <textarea name="message" rows="6" class="form-control" id="message" placeholder="Notes" required=""></textarea>
+                                                </fieldset>
+                                              </div>
+                                              <div class="col-lg-12">
+                                                <div class="blue-button">
+                                                    <a href="#">Send Request</a>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <p>
+                                                <span>Name</span>
+
+                                                <br>
+
+                                                <strong>John Smith</strong>
+
+                                            </p>
+
+                                            <p>
+                                                <span>Phone</span>
+
+                                                <br>
+                                                
+                                                <strong>
+                                                  <a href="tel:123-456-789">123-456-789</a>
+                                                </strong>
+                                            </p>
+
+                                            <p>
+                                                <span>Mobile phone</span>
+
+                                                <br>
+                                                
+                                                <strong>
+                                                  <a href="tel:456789123">456789123</a>
+                                                </strong>
+                                            </p>
+
+                                            <p>
+
+                                                <span>Email</span>
+
+                                                <br>
+                                                
+                                                <strong>
+                                                  <a href="mailto:john@carsales.com">john@carsales.com</a>
+                                                </strong>
+                                              </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul> <!-- / accordion -->
+                         <div class="review_form field_form">
+                                <h5>Add a review</h5>
+                                <form class="row mt-3">
+                                    <div class="form-group col-12">
+                                        <div class="star_rating">
+                                            <span data-value="1"><i class="far fa-star"></i></span>
+                                            <span data-value="2"><i class="far fa-star"></i></span>
+                                            <span data-value="3"><i class="far fa-star"></i></span>
+                                            <span data-value="4"><i class="far fa-star"></i></span>
+                                            <span data-value="5"><i class="far fa-star"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <textarea required="required" placeholder="Your review *" class="form-control" name="message" rows="4"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input required="required" placeholder="Enter Name *" class="form-control" name="name" type="text">
+                                     </div>
+                                    <div class="form-group col-md-6">
+                                        <input required="required" placeholder="Enter Email *" class="form-control" name="email" type="email">
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <button type="submit" class="btn btn-fill-out" name="submit" value="Submit">Submit Review</button>
+                                    </div>
+                                </form>
+                            </div>
+                    </div>
+                </form>
+                <div class="row">
+                  <div class="col-12">
+                      <div class="heading_s1">
+                          <h3>Produits similaire</h3>
+                        </div>
+                      <div class="releted_product_slider carousel_slider owl-carousel owl-theme" data-margin="20" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "1199":{"items": "4"}}'>
+                          {% for destination in voyage.destnation %}
+                            {% for voyage in destination.voyages %}
+                              {{ include("partials/voyage_item.html.twig",{'voyage': voyage}) }}
+                            {% endfor %}
+                          {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    </main>
+{% endblock body %}

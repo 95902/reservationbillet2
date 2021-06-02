@@ -30,7 +30,7 @@ class Hotels
     private $description;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="text")
      */
     private $prix_nuit;
 
