@@ -64,6 +64,16 @@ class Hotels
      */
     private $voyages;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Addresse;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $Maps;
+
     public function __construct()
     {
         $this->destination = new ArrayCollection();
@@ -212,6 +222,30 @@ class Hotels
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getAddresse(): ?string
+    {
+        return $this->Addresse;
+    }
+
+    public function setAddresse(string $Addresse): self
+    {
+        $this->Addresse = $Addresse;
+
+        return $this;
+    }
+
+    public function getMaps(): ?string
+    {
+        return $this->Maps;
+    }
+
+    public function setMaps(string $Maps): self
+    {
+        $this->Maps = $Maps;
+
+        return $this;
     }
 
 }
