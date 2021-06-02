@@ -175,4 +175,15 @@ class Address
 
         return $this;
     }
+
+    public function __toString()
+    {
+        $result = "[spr]".$this->fullName."[spr]";
+        $result .= $this->address."[spr]";
+        $result .= $this->codePostal." - ".$this->city."[spr]";
+        $result .= $this->contry."[spr]";
+   
+       return $result; 
+        
+    }
 }

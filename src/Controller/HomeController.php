@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Voyages;
+use App\Repository\HotelsRepository;
+use App\Repository\VolsRepository;
 use App\Repository\VoyagesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,18 +15,40 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(VoyagesRepository $repoVoyage): Response
+    public function index(VoyagesRepository $repoVoyage, VolsRepository $repovols,HotelsRepository $reposhotels): Response
     {
         $voyages = $repoVoyage->findAll();
         $voyageOffreSpecial = $repoVoyage->findByIsSpecialOffert(1);
-        // dd($voyages, $voyageOffreSpecial);
+        $vols = $repovols->findAll();
+        $hotels = $reposhotels->findAll();
+        //  dd($voyages, $voyageOffreSpecial);
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'voyages'=> $voyages,
-            'voyageOffreSpecial' => $voyageOffreSpecial
+            'voyageOffreSpecial' => $voyageOffreSpecial,
+            'vols'=>$vols,
+            'hotels'=>$hotels,
         ]);
     }
+
     
      
+
+    /**
+    * @Route("/voyage/{slug}",name="voyage_details")
+    */
+    public function show(?Voyages $voyage,HotelsRepository $reposhotels): Response{
+        $hotels = $reposhotels->findAll();  
+        // dd($voyage, $hotels);  
+        if (!$voyage) {
+            return $this->redirectToRoute("home");
+        }
+        return $this->render("home/single_voyage.html.twig",[
+            'voyage'=>$voyage,
+            'hotels'=>$hotels,
+            
+        ]);    
+    }
+
 }
