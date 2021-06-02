@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Address;
 use App\Form\AddressType;
 use App\Repository\AddressRepository;
+use App\Services\CartServices;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +29,7 @@ class AddressController extends AbstractController
     /**
      * @Route("/new", name="address_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request,CartServices $cartServices): Response
     {
         $address = new Address();
         $form = $this->createForm(AddressType::class, $address);
@@ -40,8 +41,12 @@ class AddressController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($address);
             $entityManager->flush();
+            
             $this->addFlash('address_message','Your address has been saved');
-
+ 
+            if( $cartServices->getFullCart()){
+                return $this->redirectToRoute('checkout');
+            }
             return $this->redirectToRoute('account');
         }
 

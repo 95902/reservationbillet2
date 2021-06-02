@@ -1,13 +1,17 @@
 <?php
 namespace App\Services;
 
+
 use App\Repository\VoyagesRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
+
 
 class CartServices{
 
     private $session;
     private $repoVoyage;
+    private $tva = 0.2;
 
     public function __construct(SessionInterface $session, VoyagesRepository $repoVoyage)
     {
@@ -63,6 +67,8 @@ class CartServices{
     public function updatCart($cart){
 
         $this->session->set('cart',$cart);
+
+        $this->session->set('cartData', $this->getFullCart());
         
     }
 
@@ -76,6 +82,8 @@ class CartServices{
         $cart = $this->getCart();
 
         $fulCart=[];
+        $quantite_cart = 0;
+        $subTotal =0;
         foreach ($cart as $id => $quantite) {
            $voyage= $this->repoVoyage->find($id);
 
@@ -84,34 +92,22 @@ class CartServices{
                 $fulCart[]=
                 [
                     "quantite" => $quantite,
-                    "voyage"=> $voyage
+                    "voyage"=> $voyage,
                 ];
+                $quantite_cart += $quantite;
+                $subTotal +=$quantite * $voyage->getPrix()/100;
             }else{
                 $this->deletFromCart($id);
             }
         }
+        // $fulCart['data']=[
+        //     "quantite_cart" => $quantite_cart,
+        //     "subTotalHt"=> $subTotal,
+        //     "Taxe" => round($subTotal*$this->tva,2), 
+        //     "subTotalTTC"=> round(($subTotal + ($subTotal * $this->tva)), 2)
+        // ];
           return $fulCart;
     }
 
-    
-    public function __toString() {
-        $cart = $this->getCart();
 
-        $fulCart=[];
-        foreach ($cart as $id => $quantite) {
-           $voyage= $this->repoVoyage->find($id);
-
-           if ($voyage) {
-               # voyage récupérer
-                $fulCart[]=
-                [
-                    "quantite" => $quantite,
-                    "voyage"=> $voyage
-                ];
-            }else{
-                $this->deletFromCart($id);
-            }
-        }
-        return $this->cart;
-    }
 }

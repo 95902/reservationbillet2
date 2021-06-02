@@ -1,0 +1,5 @@
+{
+"header":["id","name","description","prix","duree","image","is_special_offert","quantite","created_at","tags","slug"],
+"rows":["4","HELLO","<div>jjjjjjjjsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss<\/div>","12200","20","logoh.jpg","0","1","2021-06-01 09:31:16",null,"hello"]         
+}
+    
