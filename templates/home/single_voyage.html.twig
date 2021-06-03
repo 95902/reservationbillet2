@@ -30,8 +30,17 @@
             </div>
         </div>
     </section>
-
-    <main>
+ {# {% for voiture_loc in voyage.voiture_loc %}
+ <pre>
+   {{ dump(voiture_loc) }}
+   {% for voiture in voiture_loc.voiture %}
+<pre>
+  {{ dump(voiture.type) }}
+</pre>
+  {% endfor %}
+ </pre>
+  {% endfor %} #}
+  <main>
         <section class="featured-places">
             <div class="container">
                <div class="row">
@@ -126,7 +135,8 @@
                                 <a class="accordion-trigger">Hotel: 
                                 {% for hotel in  voyage.hotel %}
                                       {{ hotel }}
-                                {% endfor %}
+                                {% endfor %} 
+
                                 </a>
                                 <div class="accordion-content">
                                     <ul class="list-group list-group-no-border">
@@ -172,7 +182,7 @@
                                            <div class="row">
                                                 <div class="col-md-2 col-sm-3">
                                                      <p>
-                                                          <strong>Policies</strong>
+                                                          <strong>Equipements</strong>
                                                      </p>
                                                 </div>
                                                 <div class="col-md-10 col-sm-9">
@@ -180,7 +190,39 @@
                                                         {% for hotel in  voyage.hotel %}
                                                           
                                                           {% if hotel.isSpa == 1 %}
-                                                           <i class="fa fa-snowflake-o" aria-hidden="true"></i>
+                                                           <i class='fas fa-spa fa-lg '><br/> <p style=" font-size:1.2rem"> Spa</p></i>
+                                                          {% endif %}
+
+                                                          {% if hotel.isWifi == 1 %}
+                                                           <i class='fas fa-wifi fa-lg ml-5'><br/> <p style=" font-size:1.2rem"> Wifi</p></i>
+                                                          {% endif %}
+
+                                                          {% if hotel.isPiscine == 1 %}
+                                                           <i class='fas fa-swimming-pool fa-lg ml-5'><br/> <p style=" font-size:1.2rem"> Piscine</p></i>
+                                                          {% endif %}
+
+                                                          {% if hotel.IsPlage == 1 %}
+                                                           <i class='fas fa-umbrella-beach fa-lg ml-5'><br/> <p style=" font-size:1.2rem">Plage</p></i>
+                                                          {% endif %}
+
+                                                          {% if hotel.isSport == 1 %}
+                                                           <i class='fas fa-dumbbell fa-lg ml-5'><br/> <p style=" font-size:1.2rem"> Sport</p></i>
+                                                          {% endif %}
+                                                          
+                                                          {% if hotel.isBar == 1 %}
+                                                           <i class='fas fa-cocktail fa-lg ml-5'><br/> <p style=" font-size:1.2rem"> Bar</p></i>
+                                                          {% endif %}
+                                                          
+                                                          {% if hotel.isRestaurant == 1 %}
+                                                           <i class='fas fa-utensils fa-lg ml-5'><br/> <p style=" font-size:1.2rem"> Restaurent</p></i>
+                                                          {% endif %}
+                                                          
+                                                          {% if hotel.isParking == 1 %}
+                                                           <i class='fas fa-car fa-lg ml-5'><br/> <p style=" font-size:1.2rem"> Parking</p></i>
+                                                          {% endif %}
+
+                                                           {% if hotel.isClim == 1 %}
+                                                           <i class='fas fa-snowflake  fa-lg ml-5'><br/> <p style=" font-size:1.2rem"> Clim</p></i>
                                                           {% endif %}
 
                                                         {% endfor %}
@@ -195,7 +237,7 @@
                                            <div class="row">
                                                 <div class="col-md-2 col-sm-3">
                                                      <p>
-                                                          <strong>Fees</strong>
+                                                          <strong>Images</strong>
                                                      </p>
                                                 </div>
 
@@ -216,103 +258,197 @@
                             <li>
                                 <a class="accordion-trigger">Map</a>
                                 <div class="accordion-content">
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11628.751733874766!2d27.948302749999996!3d43.22651925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbg!4v1592215682178!5m2!1sen!2sbg" width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                    <iframe src=" 
+                                    {% for hotels in  voyage.hotel %}
+                                     {{ hotels.Maps}}
+                                     {% endfor %} " 
+                                      width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                                 </div>
                             </li>
-                            <li>
-                                <a class="accordion-trigger">Enquiry &amp; Contact Details</a>
-
+                             <li>
+                                <a class="accordion-trigger">Agence de location: 
+                                {% for voiture_loc in voyage.voiture_loc %}
+                                          {{ voiture_loc.name  }}
+                                {% endfor %}
+                                </a>
                                 <div class="accordion-content">
-                                    <div class="row">
-                                        <div class="col-lg-8">
-                                            <div class="row">
-                                              <div class="col-sm-6">
-                                                <fieldset>
-                                                  <input name="name" type="text" class="form-control" id="name" placeholder="Name" required="">
-                                                </fieldset>
-                                              </div>
-
-                                              <div class="col-sm-6">
-                                                <fieldset>
-                                                  <input name="email" type="email" class="form-control" id="email" placeholder="Email" required="">
-                                                </fieldset>
-                                              </div>
-
-                                              <div class="col-sm-6">
-                                                <fieldset>
-                                                  <input name="phone" type="text" class="form-control" id="phone" placeholder="Phone" required="">
-                                                </fieldset>
-                                              </div>
-
-                                              <div class="col-sm-3">
-                                                <fieldset>
-                                                  <input name="date1" type="text" class="form-control" id="date1" placeholder="From 16.06.2020" required="">
-                                                </fieldset>
-                                              </div>
-
-                                              <div class="col-sm-3">
-                                                <fieldset>
-                                                  <input name="date2" type="text" class="form-control" id="date2" placeholder="To 16.06.2020" required="">
-                                                </fieldset>
-                                              </div>
-                                              
-                                              <div class="col-lg-12">
-                                                <fieldset>
-                                                  <textarea name="message" rows="6" class="form-control" id="message" placeholder="Notes" required=""></textarea>
-                                                </fieldset>
-                                              </div>
-                                              <div class="col-lg-12">
-                                                <div class="blue-button">
-                                                    <a href="#">Send Request</a>
+                                    <ul class="list-group list-group-no-border">
+                                      <li class="list-group-item">
+                                           <div class="row">
+                                                <div class="col-md-2 col-sm-3">
+                                                     <p class="pjVpProductPolicyTitle">
+                                                          <strong>Description</strong>
+                                                     </p>
                                                 </div>
-                                              </div>
-                                            </div>
-                                        </div>
+                                                <div class="col-md-10 col-sm-9">
+                                                     <p>
+                                                      {% for voiture_loc in voyage.voiture_loc %}
+                                                                {{ voiture_loc.description | raw  }}
+                                                      {% endfor %}
+                                                     </p>
+                                                </div>
+                                           </div>
+                                      </li>
 
-                                        <div class="col-lg-4">
-                                            <p>
-                                                <span>Name</span>
+                                      <li class="list-group-item">
+                                           <div class="row">
+                                                <div class="col-md-2 col-sm-3">
+                                                     <p>
+                                                          <strong>Prix Journnée</strong>
+                                                     </p>
+                                                </div>
 
-                                                <br>
+                                                <div class="col-md-10 col-sm-9">
+                                                     <p>
+                                                        {% for voiture_loc in voyage.voiture_loc %}
+                                                                {{ voiture_loc.prix_jours/100 }}€
+                                                        {% endfor %}
+                                                     </p>
+                                                </div>
+                                           </div>
+                                      </li>
+                                      <li class="list-group-item">
+                                           <div class="row">
+                                                <div class="col-md-2 col-sm-2">
+                                                  <p>
+                                                      <strong>Type de véhicule: </strong>
+                                                  </p>
+                                                </div>
+                                                <div class="col-md-1 col-sm-1">
+                                                  <p>   
+                                                    <strong>                                                     
+                                                      {% for voiture_loc in voyage.voiture_loc %}                                                     
+                                                        {% for voiture in voiture_loc.voiture %}
+                                                        {{voiture.type}}
+                                                        {% endfor %}
+                                                      {% endfor %}
+                                                    </strong>
+                                                  </p>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2">
+                                                  <p>
+                                                    <strong>Marque du véhicule:</strong>
+                                                  </p>
+                                                </div>
+                                                <div class="col-md-2 col-sm-1">
+                                                  <p>   
+                                                    <strong>                                                     
+                                                      {% for voiture_loc in voyage.voiture_loc %}                                                     
+                                                        {% for voiture in voiture_loc.voiture %}
+                                                        {{voiture.name}}
+                                                       
+                                                        {% endfor %}
+                                                      {% endfor %}
+                                                    </strong>
+                                                  </p>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2">
+                                                  <p>
+                                                    <strong>Option du véhicule:</strong>
+                                                  </p>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2">
 
-                                                <strong>John Smith</strong>
+                                                 {% for voiture_loc in voyage.voiture_loc %}                                                     
+                                                  {% for voiture in voiture_loc.voiture %}
+                                                  {% if voiture.isBagage == 1 %}
+                                                      <i class='fas fa-suitcase fa-lg ml-5'><br/> <p style=" font-size:1.2rem"> Bagages</p></i>
+                                                      {% endif %}
 
-                                            </p>
+                                                    {% if voiture.isBagage == 1 %}
+                                                      <i class='fas fa-snowflake fa-lg ml-5'><br/> <p style=" font-size:1.2rem"> Clim</p></i>
+                                                    {% endif %}
+                                                  {% endfor %}
+                                                {% endfor %}                 
+                                              </div>  
+                                              <div class="col-md-1 col-sm-1">
+                                                        {% for voiture_loc in voyage.voiture_loc %}                                                     
+                                                          {% for voiture in voiture_loc.voiture %}
+                                                            <p style=" font-size:1.2rem">                                                       
+                                                              {% if voiture.isAuto == 1 %}
+                                                            
+                                                                Boîte: Manuelle
+                                                                {% else %}
+                                                                Boîte:Automatique
+                                                              {% endif %}
+                                                            </p>
+                                                          {% endfor %}
+                                                        {% endfor %}       
+                                                                                           
+                                                                                                                                                
+                                                </div>
+                                           </div>
+                                      </li>
+                                      
+                                      <li class="list-group-item">
+                                           <div class="row">
+                                                <div class="col-md-2 col-sm-3">
 
-                                            <p>
-                                                <span>Phone</span>
-
-                                                <br>
                                                 
-                                                <strong>
-                                                  <a href="tel:123-456-789">123-456-789</a>
-                                                </strong>
-                                            </p>
 
-                                            <p>
-                                                <span>Mobile phone</span>
 
-                                                <br>
-                                                
-                                                <strong>
-                                                  <a href="tel:456789123">456789123</a>
-                                                </strong>
-                                            </p>
 
-                                            <p>
 
-                                                <span>Email</span>
+                                                     <p>
+                                                          <strong>Images</strong>
+                                                     </p>
+                                                </div>
 
-                                                <br>
-                                                
-                                                <strong>
-                                                  <a href="mailto:john@carsales.com">john@carsales.com</a>
-                                                </strong>
-                                              </p>
-                                        </div>
-                                    </div>
+                                                <div class="col-md-10 col-sm-9">
+                                                    
+                                              
+                                                <div class="product-image">
+                                                  <div class="product_img_box">
+                                                      {% for voiture_loc in voyage.voiture_loc %}                                                     
+                                                        {% for voiture in voiture_loc.voiture %}
+                                                          <img id="product_img" src='/assets/upload/voitures/{{voiture.image}}' data-zoom-image="/assets/upload/voitures/{{voiture.image}}" alt="product_img1" />
+                                                            <a href="#" class="product_img_zoom" title="Zoom">
+                                                            <span class="linearicons-zoom-in"></span>
+                                                            </a>
+                                                        
+                                                        {% endfor %}
+                                                      {% endfor %}  
+                                                    
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              
+                                           </div>
+                                      </li>
+                                 </ul>
                                 </div>
                             </li>
+                           <li>
+                              <a class="accordion-trigger">Vol</a>
+                              <div class="accordion-content">
+                                Compagny aérien :
+                                {% for vol in voyage.vol %}                                                     
+                                    {% for compagny in vol.compagny %}
+                                        {{compagny.name}}                                    
+                                    {% endfor %}
+                                  {% endfor %}
+
+                                  {% for vol in voyage.vol %}                                                     
+                                    {% for compagny in vol.compagny %}
+                                   
+                                          <img src=" /assets/upload/compagnie/{{compagny.image}}" width="50px" height="50px" alt="">
+                                                                    
+                                    {% endfor %}
+                                  {% endfor %} 
+                                  <br>
+                                Type de vol :
+                                  {% for vol in voyage.vol %}                                                     
+                                    {% for type_vol in vol.type_vol %}
+                                        {{type_vol.name}}                                    
+                                    {% endfor %}
+                                  {% endfor %}    
+
+
+                                     
+
+
+                              </div>
+                          </li>
                         </ul> <!-- / accordion -->
                          <div class="review_form field_form">
                                 <h5>Add a review</h5>

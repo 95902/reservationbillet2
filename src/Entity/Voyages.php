@@ -67,7 +67,7 @@ class Voyages
     /**
      * @ORM\ManyToMany(targetEntity=AgenceLocationVoitures::class, inversedBy="voyages")
      */
-    private $voiture_loc;
+    public $voiture_loc;
 
     
 

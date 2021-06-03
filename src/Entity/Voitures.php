@@ -34,6 +34,31 @@ class Voitures
      */
     private $agenceLocationVoitures;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $IsClim;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isAuto = true;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isManuel= false;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isBagage;
+
     public function __construct()
     {
         $this->agenceLocationVoitures = new ArrayCollection();
@@ -97,5 +122,65 @@ class Voitures
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getIsClim(): ?bool
+    {
+        return $this->IsClim;
+    }
+
+    public function setIsClim(?bool $IsClim): self
+    {
+        $this->IsClim = $IsClim;
+
+        return $this;
+    }
+
+    public function getIsAuto(): ?bool
+    {
+        return $this->isAuto;
+    }
+
+    public function setIsAuto(bool $isAuto): self
+    {
+        $this->isAuto = $isAuto;
+
+        return $this;
+    }
+
+    public function getIsManuel(): ?bool
+    {
+        return $this->isManuel;
+    }
+
+    public function setIsManuel(?bool $isManuel): self
+    {
+        $this->isManuel = $isManuel;
+
+        return $this;
+    }
+
+    public function getIsBagage(): ?bool
+    {
+        return $this->isBagage;
+    }
+
+    public function setIsBagage(?bool $isBagage): self
+    {
+        $this->isBagage = $isBagage;
+
+        return $this;
     }
 }

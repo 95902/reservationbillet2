@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\AgenceLocationVoitures;
 use App\Entity\Voyages;
+use App\Repository\AgenceLocationVoituresRepository;
 use App\Repository\DestinationsRepository;
 use App\Repository\HotelsRepository;
 use App\Repository\VolsRepository;
@@ -41,14 +43,14 @@ class HomeController extends AbstractController
     /**
     * @Route("/voyage/{slug}",name="voyage_details")
     */
-    public function show(?Voyages $voyage,HotelsRepository $reposhotels,DestinationsRepository $reposdestination): Response{
+    public function show(?Voyages $voyage,HotelsRepository $reposhotels,DestinationsRepository $reposdestination,AgenceLocationVoituresRepository $reposelocation): Response{
 
         $id_voyage = $voyage->getId();
         $hotels = $reposhotels->findAll();
         $destinations=$reposdestination->findAll();
-        
+        $locationVoitureAgence = $reposelocation->findAll();
       
-        //   dd($hotel, $id_voyage,$hotels,$voyage );  
+        //   dd($reposelocation);  
 
         if (!$voyage) {
             return $this->redirectToRoute("home");
@@ -57,6 +59,7 @@ class HomeController extends AbstractController
             'voyage'=>$voyage,
             'hotels'=>$hotels,
             'destinations'=> $destinations,
+            'agenceLocationVoiture'=>$locationVoitureAgence,
             
         ]);    
     }
