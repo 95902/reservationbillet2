@@ -39,7 +39,7 @@ class Vols
     /**
      * @ORM\ManyToMany(targetEntity=TypeVols::class, inversedBy="vols")
      */
-    private $type_vol;
+    public $type_vol;
 
     /**
      * @ORM\ManyToMany(targetEntity=Voyages::class, mappedBy="vol")

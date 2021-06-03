@@ -35,6 +35,13 @@ class HotelsCrudController extends AbstractCrudController
             BooleanField::new('isSpa'),
             BooleanField::new('isWifi'),
             BooleanField::new('isPiscine'),
+            BooleanField::new('IsPlage'),
+            BooleanField::new('isClim'),
+            BooleanField::new('isSport'),
+            BooleanField::new('isBar'),
+            BooleanField::new('isRestaurant'),
+            BooleanField::new('isParking'),
+            
             
         ];
     }

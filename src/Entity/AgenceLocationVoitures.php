@@ -32,7 +32,7 @@ class AgenceLocationVoitures
     /**
      * @ORM\Column(type="float")
      */
-    private $prix_jours;
+    public $prix_jours;
 
     /**
      * @ORM\Column(type="string", length=255)

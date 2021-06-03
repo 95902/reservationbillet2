@@ -79,6 +79,36 @@ class Hotels
      */
     private $prix;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $IsPlage;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isClim;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isSport;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isBar;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isRestaurant;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isParking;
+
     public function __construct()
     {
         $this->destination = new ArrayCollection();
@@ -267,6 +297,78 @@ class Hotels
     public function setPrix(?string $prix): self
     {
         $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getIsPlage(): ?bool
+    {
+        return $this->IsPlage;
+    }
+
+    public function setIsPlage(?bool $IsPlage): self
+    {
+        $this->IsPlage = $IsPlage;
+
+        return $this;
+    }
+
+    public function getIsClim(): ?bool
+    {
+        return $this->isClim;
+    }
+
+    public function setIsClim(?bool $isClim): self
+    {
+        $this->isClim = $isClim;
+
+        return $this;
+    }
+
+    public function getIsSport(): ?bool
+    {
+        return $this->isSport;
+    }
+
+    public function setIsSport(?bool $isSport): self
+    {
+        $this->isSport = $isSport;
+
+        return $this;
+    }
+
+    public function getIsBar(): ?bool
+    {
+        return $this->isBar;
+    }
+
+    public function setIsBar(?bool $isBar): self
+    {
+        $this->isBar = $isBar;
+
+        return $this;
+    }
+
+    public function getIsRestaurant(): ?bool
+    {
+        return $this->isRestaurant;
+    }
+
+    public function setIsRestaurant(?bool $isRestaurant): self
+    {
+        $this->isRestaurant = $isRestaurant;
+
+        return $this;
+    }
+
+    public function getIsParking(): ?bool
+    {
+        return $this->isParking;
+    }
+
+    public function setIsParking(?bool $isParking): self
+    {
+        $this->isParking = $isParking;
 
         return $this;
     }
