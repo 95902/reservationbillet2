@@ -36,64 +36,73 @@
                         </div>
                         <div class=" col-md-7 col-md-pull-7">
                             <div class="booking-form">
-                                <form>
+                               
+                                    {{ form_start(search) }}
                                     <div class="form-group">
-                                        <span class="form-label">Votr Destination</span>
-                                        <input class="form-control" type="text" placeholder="Enter a destination or hotel name">
+                                        <span class="form-label">Votre Destination</span>
+                                        {# <input class="form-control" type="text" placeholder="Enter a destination or hotel name"> #}
+                                        {{ form_row(search.destination)}}
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <span class="form-label">Départ</span>
-                                                <input class="form-control" type="date" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <span class="form-label">Retour</span>
-                                                <input class="form-control" type="date" required>
-                                            </div>
-                                        </div>
-                                    </div>
+
+
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <span class="form-label">Chambre</span>
-                                                <select class="form-control">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                </select>
-                                                <span class="select-arrow"></span>
+                                                <span class="form-label">Nb de jours</span>
+                                                 {{ form_row(search.duree)}}
+                                               
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <span class="form-label">Adultes</span>
-                                                <select class="form-control">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                </select>
-                                                <span class="select-arrow"></span>
+                                                <span class="form-label">Tags</span>
+                                                {{ form_row(search.tag)}}
+                                                
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <span class="form-label">Enfants</span>
-                                                <select class="form-control">
-                                                    <option>0</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                </select>
-                                                <span class="select-arrow"></span>
+                                                <span class="form-label">Type de vole </span>
+                                                 {{ form_row(search.type_vole)}}
+                                                
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <span class="form-label"> véhicule de location</span>
+                                                {{ form_row(search.type_vehicule)}}
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <span class="form-label">Hôtels All inclusive</span>
+                                                {# {{ form_row(search.all_incluse)}} #}
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="col-sm-12">
+                                        <span class="form-label"> Budget</span>
+                                            <div class="form-group">
+                                                
+                                                <div  class="col-md-6">
+                                                 {{ form_row(search.minprix)}} 
+                                                </div>
+                                                 <div  class="col-md-6">
+                                                 {{ form_row(search.maxprix)}} 
+                                                </div>
+                                            </div>
+                                        </div>                                  
                                     </div>
                                     <div class="form-btn">
-                                        <button class="submit-btn">Envoyer</button>
+                                        <button class="btn btn-border-fill btn-block">Envoyer</button>                                       
                                     </div>
-                                </form>
+                                    {{ form_end(search) }}
+                               
                             </div>
                         </div>
                     </div>
@@ -327,4 +336,16 @@
             </div>
         </section>
     </main>
+    
 {% endblock %}
+  {% block javascripts %}
+    <script>
+        $(document).ready(function() {
+                $('.js-destination-multiple').select2();
+                  $('.js-type_vole-multiple').select2();
+                    $('.js-type_vehicule-multiple').select2();
+                      $('.js-all_incluse-multiple').select2();
+        });
+    </script>
+{% endblock %}
+    

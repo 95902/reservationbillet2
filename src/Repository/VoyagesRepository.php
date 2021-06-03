@@ -19,6 +19,53 @@ class VoyagesRepository extends ServiceEntityRepository
         parent::__construct($registry, Voyages::class);
     }
 
+
+    /**
+    * @return Voyages[] Returns an array of Voyages objects
+    */
+ 
+    public function findWithSearch($search)
+    {
+
+        $query =  $this->createQueryBuilder('v');
+            // min max 
+        if ($search->getminprix() ) {
+            $query = $query->andWhere('v.prix > '.$search->getminprix()*100);
+        }
+        if ($search->getmaxprix() ) {
+            $query = $query->andWhere('v.prix < '.$search->getmaxprix()*100);
+        }
+       //tag 
+
+        if ($search->getTag() ) {
+        $query = $query->andWhere('v.tags like :val')
+                        ->setParameter('val', "%{$search->getTag()}%");
+        }
+
+        if ($search->getDestination() ) {
+            $query = $query->join('v.destnation', 'd')
+                            ->andWhere('d.id IN (:destinations)')
+                            ->setParameter('destinations', $search->getDestination());
+            }
+       
+
+
+        $query->getQuery()->getResult();
+
+
+
+
+    }
+
+
+      
+        
+    
+
+
+
+
+
     // /**
     //  * @return Voyages[] Returns an array of Voyages objects
     //  */

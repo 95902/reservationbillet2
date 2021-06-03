@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\AgenceLocationVoitures;
+use App\Entity\SearchVoyage;
 use App\Entity\Voyages;
+use App\Form\SearchVoyageType;
 use App\Repository\AgenceLocationVoituresRepository;
 use App\Repository\DestinationsRepository;
 use App\Repository\HotelsRepository;
@@ -11,6 +13,7 @@ use App\Repository\VolsRepository;
 use App\Repository\VoyagesRepository;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,21 +22,29 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(VoyagesRepository $repoVoyage, VolsRepository $repovols,HotelsRepository $reposhotels): Response
+    public function index(VoyagesRepository $repoVoyage, Request $request): Response
     {
         $voyages = $repoVoyage->findAll();
-        $voyageOffreSpecial = $repoVoyage->findByIsSpecialOffert(1);
-        $vols = $repovols->findAll();
-        $hotels = $reposhotels->findAll();
+     
+        $search = new SearchVoyage();
+        $form = $this->createForm(SearchVoyageType::class, $search);
         //  dd($voyages, $voyageOffreSpecial);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid() ) {
+            $voyages = $repoVoyage->findWithSearch($search);
+            
+            return $this->render('home/voyage.html.twig', ['voyages'=> $voyages ]);
+        }
+
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
+            'search'=>$form->createView(),
             'voyages'=> $voyages,
-            'voyageOffreSpecial' => $voyageOffreSpecial,
-            'vols'=>$vols,
-            'hotels'=>$hotels,
-            'reposhotel'=> $reposhotels,
+    
+            
         ]);
     }
 

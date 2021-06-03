@@ -27,7 +27,7 @@ class Destinations
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nom_pays;
+    public $nom_pays;
 
     /**
      * @ORM\ManyToMany(targetEntity=Voyages::class, mappedBy="destnation")
