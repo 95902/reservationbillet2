@@ -30,6 +30,7 @@ class VoyagesCrudController extends AbstractCrudController
             TextField::new('name'),
             SlugField::new('slug')->setTargetFieldName('name')->hideOnIndex(),
             TextEditorField::new('description'),
+            TextEditorField::new('Maps'),
             IntegerField::new('duree'),
             TextField::new('tags'),
             IntegerField::new('quantite'),

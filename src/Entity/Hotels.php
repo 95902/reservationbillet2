@@ -30,7 +30,7 @@ class Hotels
     private $description;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="float")
      */
     private $prix_nuit;
 
@@ -73,6 +73,11 @@ class Hotels
      * @ORM\Column(type="text")
      */
     private $Maps;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $prix;
 
     public function __construct()
     {
@@ -244,6 +249,24 @@ class Hotels
     public function setMaps(string $Maps): self
     {
         $this->Maps = $Maps;
+
+        return $this;
+    }
+
+    // public function getHotel($id){
+
+
+    //     return $this-> 
+    // }
+
+    public function getPrix(): ?string
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?string $prix): self
+    {
+        $this->prix = $prix;
 
         return $this;
     }

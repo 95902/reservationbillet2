@@ -25,7 +25,10 @@ class HotelsCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
-            TextEditorField::new('description'),
+            TextField::new('description'),
+            TextField::new('Addresse'),
+            TextField::new('Maps'),
+            TextField::new('prix'),
             MoneyField::new('prix_nuit')->setCurrency('USD'),
             AssociationField::new('destination'),
             BooleanField::new('isAllInclude'),

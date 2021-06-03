@@ -40,12 +40,13 @@
                       <img src="img/product-1-720x480.jpg" alt="" class="img-responsive wc-image">
                     </div>
                     <br>
-                        <h2><strong class="text-primary">{{ voyage.prix /100 }}</strong></h2>
+                        <h2><strong class="text-primary">{{ voyage.prix /100 }}€</strong></h2>
                         <h2><small><i class="fa fa-map-marker"></i> 
+                         
                          {% for hotel in  voyage.hotel %}
-                         {{hotel}} ,  
+                         {{hotel}} ,{{hotel.addresse}}  
                         {% endfor %}
-                        
+                    
                          </small></h2>
 
                   </div>
@@ -141,10 +142,7 @@
                                                       {% for hotels in  voyage.hotel %}
                                                            
                                                               {{ hotels.description | raw  }}
-                                                            
-                                                        
-                                                          
-                                                            
+
                                                         {% endfor %} 
                                                      </p>
                                                 </div>
@@ -161,37 +159,15 @@
 
                                                 <div class="col-md-10 col-sm-9">
                                                      <p>
-                                                     
+                                                           {% for hotels in  voyage.hotel %}
                                                            
-                                                              {# {{ hotels.prix_nuit }} #}
-                                                            
-                                                        
-                                                     {# {% for voyage in hotel.voyages %}
-                                                          {% for hotel in  voyage.hotel %}
-                                                            
-                                                              {{ hotel.description  }}
-                                                            {% endfor %}
-                                                        {% endfor %} #}
+                                                              {{ hotels.prix}}€
+
+                                                        {% endfor %} 
                                                      </p>
                                                 </div>
                                            </div>
                                       </li>
-
-                                      <li class="list-group-item">
-                                           <div class="row">
-                                                <div class="col-md-2 col-sm-3">
-                                                     <p>
-                                                          <strong>Pets</strong>
-                                                     </p>
-                                                </div>
-                                                <div class="col-md-10 col-sm-9">
-                                                     <p>
-                                                          Not allowed
-                                                     </p>
-                                                </div>
-                                           </div>
-                                      </li>
-
                                       <li class="list-group-item">
                                            <div class="row">
                                                 <div class="col-md-2 col-sm-3">
@@ -201,11 +177,16 @@
                                                 </div>
                                                 <div class="col-md-10 col-sm-9">
                                                      <div>
-                                                          <p>
-                                                               Donec dapibus semper sem, ac ultrices sem sagittis ut. Donec sit amet erat elit, sed pellentesque odio. In enim ligula, euismod a adipiscing in, laoreet quis turpis. Ut accumsan dignissim rutrum. <br>
-                                                                Donec dapibus semper sem, ac ultrices sem sagittis ut. Donec sit amet erat elit, sed pellentesque odio. In enim ligula, euismod a adipiscing in, laoreet quis turpis. Ut accumsan dignissim rutrum. <br>
-                                                          </p>
+                                                        {% for hotel in  voyage.hotel %}
+                                                          
+                                                          {% if hotel.isSpa == 1 %}
+                                                           <i class="fa fa-snowflake-o" aria-hidden="true"></i>
+                                                          {% endif %}
+
+                                                        {% endfor %}
+
                                                      </div>
+
                                                 </div>
                                            </div>
                                       </li>

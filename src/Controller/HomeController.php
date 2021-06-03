@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Voyages;
+use App\Repository\DestinationsRepository;
 use App\Repository\HotelsRepository;
 use App\Repository\VolsRepository;
 use App\Repository\VoyagesRepository;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,6 +31,7 @@ class HomeController extends AbstractController
             'voyageOffreSpecial' => $voyageOffreSpecial,
             'vols'=>$vols,
             'hotels'=>$hotels,
+            'reposhotel'=> $reposhotels,
         ]);
     }
 
@@ -38,15 +41,22 @@ class HomeController extends AbstractController
     /**
     * @Route("/voyage/{slug}",name="voyage_details")
     */
-    public function show(?Voyages $voyage,HotelsRepository $reposhotels): Response{
-        $hotels = $reposhotels->findAll();  
-        // dd($voyage, $hotels);  
+    public function show(?Voyages $voyage,HotelsRepository $reposhotels,DestinationsRepository $reposdestination): Response{
+
+        $id_voyage = $voyage->getId();
+        $hotels = $reposhotels->findAll();
+        $destinations=$reposdestination->findAll();
+        
+      
+        //   dd($hotel, $id_voyage,$hotels,$voyage );  
+
         if (!$voyage) {
             return $this->redirectToRoute("home");
         }
         return $this->render("home/single_voyage.html.twig",[
             'voyage'=>$voyage,
             'hotels'=>$hotels,
+            'destinations'=> $destinations,
             
         ]);    
     }

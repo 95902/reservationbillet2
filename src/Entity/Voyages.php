@@ -101,6 +101,11 @@ class Voyages
      */
     private $vol;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $Maps;
+
     public function __construct()
     {
         $this->destnation = new ArrayCollection();
@@ -396,6 +401,18 @@ class Voyages
     public function removeVol(Vols $vol): self
     {
         $this->vol->removeElement($vol);
+
+        return $this;
+    }
+
+    public function getMaps(): ?string
+    {
+        return $this->Maps;
+    }
+
+    public function setMaps(string $Maps): self
+    {
+        $this->Maps = $Maps;
 
         return $this;
     }
