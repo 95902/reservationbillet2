@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Account;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,12 +18,12 @@ class SecurityController extends AbstractController
         //     return $this->redirectToRoute('target_path');
         // }
 
-        if ($this->isGranted("ROLE_USER")) {
-            return $this->redirectToRoute('home');
-        }
-        if ($this->isGranted("ROLE_ADMIN")) {
-            return $this->redirectToRoute('admin');
-        }
+        // if ($this->isGranted("ROLE_USER")) {
+        //     return $this->redirectToRoute('home');
+        // }
+        // if ($this->isGranted("ROLE_ADMIN")) {
+        //     return $this->redirectToRoute('admin');
+        // }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

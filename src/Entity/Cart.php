@@ -219,7 +219,7 @@ class Cart
 
     public function getSubTotalHT(): ?float
     {
-        return $this->subTotalHt;
+        return $this->subTotalHT;
     }
 
     public function setSubTotalHT(float $subTotalHT): self

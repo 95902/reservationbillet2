@@ -2,6 +2,10 @@
 
 {% block title %} Checkout khyo!{% endblock %}
 
+{% block scriptStripe %}
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
 
 {% block body %}
 {{ include("partials/title_section.html.twig",{'name':'checkout'}) }}
@@ -65,7 +69,7 @@
                                 </tr>
                                 <tr>
                                     <th>Total</th>
-                                    <td class="product-subtotal">{{ cart.data.subTotalTT}}€</td>
+                                    <td class="product-subtotal">{{ cart.data.subTotalTTC}}€</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -74,7 +78,9 @@
                         <div class="heading_s1">
                             <h4>Payment</h4>
                         </div>
-                        <button type="submit" id="checkout-button" class="btn btn-fill-out btn-block">Payer| {{ SubTotal * 1.2 | round(2, 'floor') }}€</button>
+
+
+                        <button type="submit" id="checkout-button" class="btn btn-fill-out btn-block">Payer  {{ cart.data.subTotalTTC }}€</button>
 
                     </div>
                     
@@ -85,5 +91,37 @@
     </div>
 </div>
 
+
+{% endblock %}
+
+{% block javascripts %}
+
+   <script type="text/javascript">
+    // Create an instance of the Stripe object with your publishable API key
+    var stripe = Stripe("pk_test_51IyZcCCOJraNtFKTGI3YDlcrTXdmbxH15QMqgmC0aQa8dUYrjdCGkfKsDhZthLv7Ib85pRYqNzgtUpeeUmI2DOIL00QdjOmYHZ");
+    var checkoutButton = document.getElementById("checkout-button");
+    checkoutButton.addEventListener("click", function () {
+      fetch("/create-checkout-session/{{reference }}", {
+        method: "POST",
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (session) {
+          return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(function (result) {
+          // If redirectToCheckout fails due to a browser or network
+          // error, you should display the localized error message to your
+          // customer using error.message.
+          if (result.error) {
+            alert(result.error.message);
+          }
+        })
+        .catch(function (error) {
+          console.error("Error:", error);
+        });
+    });
+  </script>
 
 {% endblock %}
