@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class StockManagerServices{
 
     private $manager;
-    private $repoProduct;
+    private $repoVoyage;
 
     public function __construct(EntityManagerInterface $manager, VoyagesRepository $repoVoyage)
 
