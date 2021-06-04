@@ -28,9 +28,9 @@ class OrderServices{
               ->setDeliveryAddress($cart->getDeliveryAddress())
               ->setMoreInformations($cart->getMoreInformations())
               ->setQuantity($cart->getQuantity())
-              ->setSubtotalHT($cart->getSubTotalHT()/100)
-              ->setTaxe($cart->getTaxe()/100)
-              ->setSubtotalTTC($cart->getSubTotalTTC()/100)
+              ->setSubtotalHT($cart->getSubTotalHT())
+              ->setTaxe($cart->getTaxe())
+              ->setSubtotalTTC($cart->getSubTotalTTC())
               ->setUser($cart->getUser())
               ->setCreatedAt($cart->getCreatedAt());
         $this->manager->persist($order);
