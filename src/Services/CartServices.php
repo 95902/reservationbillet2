@@ -89,6 +89,13 @@ class CartServices{
 
            if ($voyage) {
                # voyage récupérer
+
+            if($quantite > $voyage->getQuantite())
+            {
+               $quantite = $voyage->getQuantite(); 
+               $cart[$id] = $quantite;
+               $this->updatCart($cart);
+            }
                 $fulCart['voyage'][]=
                 [
                     "quantite" => $quantite,
