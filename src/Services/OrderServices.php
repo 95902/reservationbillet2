@@ -52,7 +52,7 @@ class OrderServices{
 
         $this->manager->flush();
 
-        return $order;>>>>>>> master
+        return $order;
     }
     
     public function saveCart($data , $user)
@@ -149,7 +149,7 @@ class OrderServices{
 
         return $uuid;
 
-    }
 
+    }
 
 }
