@@ -82,6 +82,11 @@ class Order
      */
     private $subTotalTTC;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $StripCheckoutSessionId;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -220,7 +225,7 @@ class Order
 
     public function getSubTotalHT(): ?float
     {
-        return $this->subTotalHt;
+        return $this->subTotalHT*100;
     }
 
     public function setSubTotalHT(float $subTotalHT): self
@@ -232,7 +237,7 @@ class Order
 
     public function getTaxe(): ?float
     {
-        return $this->taxe;
+        return $this->taxe*100;
     }
 
     public function setTaxe(float $taxe): self
@@ -244,12 +249,24 @@ class Order
 
     public function getSubTotalTTC(): ?float
     {
-        return $this->subTotalTTC;
+        return $this->subTotalTTC*100;
     }
 
     public function setSubTotalTTC(float $subTotalTTC): self
     {
         $this->subTotalTTC = $subTotalTTC;
+
+        return $this;
+    }
+
+    public function getStripCheckoutSessionId(): ?string
+    {
+        return $this->StripCheckoutSessionId;
+    }
+
+    public function setStripCheckoutSessionId(?string $StripCheckoutSessionId): self
+    {
+        $this->StripCheckoutSessionId = $StripCheckoutSessionId;
 
         return $this;
     }

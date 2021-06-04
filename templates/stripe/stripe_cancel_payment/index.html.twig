@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Payment Canceled!{% endblock %}
+
+{% block body %}
+
+{{ include("partials/title_section.html.twig", {'name': 'Order Completed '})}}
+
+<div class="section checkout">
+	<div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-md-8">
+                <div class="text-center order_complete">
+                	<i class="fas fa-ban"></i>
+                    <div class="heading_s1">
+                      <h3>Sorry {{ order.user.firstname}} {{ order.user.lastname}}. Votre paiement a été annulé !</h3>
+                      <div>
+                        <div>paiement pour le numéro de commande <strong>{{ order.reference}}</strong>  a été annulé</div>
+                        <div>Vous avez essayé de payer votre commande et nous vous en remercions.
+
+                            Votre paiement n'a pas été accepté. Votre commande n'a pas été confirmée.
+                            Nous vous invitons à vous connecter à notre site pour renouveler votre commande.
+
+                            A bientôt sur notre boutique en ligne.</div>
+                                <div>
+
+                                <a href="{{ path('checkout')}}" class="btn btn-fill-out">Réessayer le paiement</a>
+                              </div>
+                      </div>
+
+                      <div >
+                    </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

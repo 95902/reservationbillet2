@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Commande valider !{% endblock %}
+
+{% block body %}
+
+{{ include("partials/title_section.html.twig", {'name': 'Commande valider ! '})}}
+
+<div class="section checkout">
+	<div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="text-center order_complete">
+                	<i class="fas fa-check-circle"></i>
+                    <div class="heading_s1">
+                      <h3>Merci {{ order.user.firstname }}  {{ order.user.lastname }}. pour vos achats !</h3>
+                      <div class="">
+                        <div>Référence du paiement <strong>{{ order.reference }}</strong> .</div>
+                        <div>Votre paiement est actuellement « en attente de vérification ».
+                            Les paiements sont généralement vérifiés dans l'heure.
+                            Après vérification, le conseiller reviendra vers vous pour les informtions suplémentaire.
+                            Pendant ce laps de temps, vous ne pourrez pas modifier votre commande</div>
+                        <div>
+                          <div>Nous vous remercions de votre commande! Votre commande est en cours de traitement et sera finalisée dans les 3 à 6 heures. Vous recevrez un e-mail de confirmation lorsque votre commande sera terminée..</div>
+                          <a href="{{path('home')}}" class="btn btn-fill-out">Continue les achats</a>
+                        </div>
+                      </div>
+                      <div >
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
