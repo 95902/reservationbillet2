@@ -89,7 +89,7 @@ class CartServices{
 
            if ($voyage) {
                # voyage récupérer
-                $fulCart[]=
+                $fulCart['voyage'][]=
                 [
                     "quantite" => $quantite,
                     "voyage"=> $voyage,
@@ -100,12 +100,12 @@ class CartServices{
                 $this->deletFromCart($id);
             }
         }
-        // $fulCart['data']=[
-        //     "quantite_cart" => $quantite_cart,
-        //     "subTotalHt"=> $subTotal,
-        //     "Taxe" => round($subTotal*$this->tva,2), 
-        //     "subTotalTTC"=> round(($subTotal + ($subTotal * $this->tva)), 2)
-        // ];
+        $fulCart['data']=[
+            "quantite_cart" => $quantite_cart,
+            "subTotalHt"=> $subTotal,
+            "Taxe" => round($subTotal*$this->tva,2), 
+            "subTotalTTC"=> round(($subTotal + ($subTotal * $this->tva)), 2)
+        ];
           return $fulCart;
     }
 

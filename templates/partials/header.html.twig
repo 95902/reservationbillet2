@@ -27,38 +27,44 @@
                            
                               <ul class="navbar-nav attr-nav align-items-center">
                                     <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" href="#" data-toggle="dropdown"><i class="linearicons-cart"></i><span class="cart_count">
-                                        
+                                       {% if app.session.get('cart') %}
+                                            {{ app.session.get('cartData').data.quantite_cart}}
+
+                                        {% else %}
+                                            0
+                                        {% endif %}
+
+                                       
+                                       {#  
                                         {% set Q = 0 %}
                                         {% for element in app.session.get('cartData') %}
                                                 {% set Q = Q + element.quantite %}
                                         {% endfor %}
-                                        {{ Q }}
+                                        {{ Q }} #}
                                     </span></a>
                                         <div class="cart_box dropdown-menu dropdown-menu-right">
                                             <ul class="cart_list">
-                                            {% if app.session.get('cartData')  %}
-                                                {% set SubTotal = 0 %}
-                                                {% for element in app.session.get('cartData') %}
-                                                {% set SubTotal = SubTotal + (element.quantite * element.voyage.prix/100 ) %}
+                                            {% if app.session.get('cart')  %}
+                                                
+                                                {% for element in app.session.get('cartData').voyage %}
+                                                
                                                     <li>
                                                         <a href="{{ path('cart_delete_ALL',{'id':element.voyage.id}) }}" class="item_remove"><i class="ion-close"></i></a>
                                                         <a href="#"><img src="/assets/upload/voyages/{{element.voyage.image}}" alt="cart_thumb1">{{element.voyage.name}}</a>
                                                         <span class="cart_quantity">{{element.quantite}}x<span class="cart_amount"> <span class="price_symbole">€</span></span>{{element.voyage.prix/100}}</span>
                                                     </li>
                                                 {% endfor %}
+                                                    </ul>
+                                                    <div class="cart_footer">
+                                                            <p class="cart_total"><strong>SubtotalTTC:</strong> <span class="cart_price"> <span class="price_symbole">$</span></span>{{app.session.get('cartData').data.subTotalTTC }}€</p>
+                                                            <p class="cart_buttons"><a href="{{ path('cart') }}" class="btn btn-fill-line rounded-0 view-cart">Voir pannier</a><a href="{{ path('checkout') }}" class="btn btn-fill-out rounded-0 checkout">Checkout</a></p>
+                                                        </div>
                                                 {% else %}
-                                                <li>Votre Pannier est vide! </li> 
+                                                    <li>Votre Pannier est vide! </li> 
+                                                </ul>
                                             {% endif %}
-                                            
-                                            
-                                            
+
                                             </ul>
-                                            {% if app.session.get('cartData') %}
-                                                <div class="cart_footer">
-                                                    <p class="cart_total"><strong>Subtotal:</strong> <span class="cart_price"> <span class="price_symbole">$</span></span>{{ SubTotal }}€</p>
-                                                    <p class="cart_buttons"><a href="{{ path('cart') }}" class="btn btn-fill-line rounded-0 view-cart">Voir pannier</a><a href="{{ path('checkout') }}" class="btn btn-fill-out rounded-0 checkout">Checkout</a></p>
-                                                </div>
-                                            {% endif %}
                                         </div>
                                     </li>
                                 </ul>
