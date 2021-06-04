@@ -22,6 +22,7 @@ class OrderServices{
     public function createOrder($cart)
     {
         
+
         $order = new Order();
         $order->setReference($cart->getReference())
               ->setFullName($cart->getFullName())
@@ -51,7 +52,7 @@ class OrderServices{
 
         $this->manager->flush();
 
-        return $order;
+        return $order;>>>>>>> master
     }
     
     public function saveCart($data , $user)

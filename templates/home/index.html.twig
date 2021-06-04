@@ -4,8 +4,11 @@
 
 {% block body %}
 
+{% if homeSlider %}
+     {{ include("partials/home_slider.html.twig",{'slider': homeSlider}) }}
 
-    <section class="banner" id="top" style="background-image: url(img/homepage-banner-image-1920x700.jpg);">
+{% endif %}
+    {#  <section class="banner" id="top" style="background-image: url(img/homepage-banner-image-1920x700.jpg);">
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
@@ -19,7 +22,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>  #}
 
     <main>
         <div id="booking" class="section">

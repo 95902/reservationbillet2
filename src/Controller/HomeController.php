@@ -11,6 +11,7 @@ use App\Repository\DestinationsRepository;
 use App\Repository\HotelsRepository;
 use App\Repository\VolsRepository;
 use App\Repository\VoyagesRepository;
+use App\Repository\HomeSliderRepository;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,10 +23,12 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(VoyagesRepository $repoVoyage, Request $request): Response
+    public function index(VoyagesRepository $repoVoyage, Request $request, HomeSliderRepository $repoHomeSlider): Response
     {
         $voyages = $repoVoyage->findAll();
-     
+
+        $homeSlider = $repoHomeSlider->findBy(['isDisplayed'=>true]);
+
         $search = new SearchVoyage();
         $form = $this->createForm(SearchVoyageType::class, $search);
         //  dd($voyages, $voyageOffreSpecial);
@@ -45,6 +48,7 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
             'search'=>$form->createView(),
             'voyages'=> $voyages,
+            'homeSlider'=> $homeSlider,
     
             
         ]);

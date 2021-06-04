@@ -13,6 +13,8 @@ use App\Entity\Voitures;
 use App\Entity\Vols;
 use App\Entity\Voyages;
 use App\Entity\User;
+use App\Entity\HomeSlider;
+use App\Entity\Contact;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -52,8 +54,13 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Compagnies', 'fas fa-list', Compagnies::class);
         yield MenuItem::linkToCrud('Ag location', 'fas fa-list', AgenceLocationVoitures::class);
         yield MenuItem::linkToCrud('User', 'fas fa-list', User::class);
+<<<<<< slider
+        yield MenuItem::linkToCrud('Sliders', 'fas fa-images', HomeSlider::class);
+        yield MenuItem::linkToCrud('Contact', 'fas fa-images', Contact::class);
+
         yield MenuItem::linkToCrud('Facture', 'fas fa-shopping-bag', Order::class);
         yield MenuItem::linkToCrud('Panier', 'fas fa-boxes', Cart::class);
+master
         
     }
 }
