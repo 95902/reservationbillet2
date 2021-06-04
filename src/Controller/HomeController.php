@@ -34,8 +34,10 @@ class HomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid() ) {
             $voyages = $repoVoyage->findWithSearch($search);
-            
-            return $this->render('home/voyage.html.twig', ['voyages'=> $voyages ]);
+
+            return $this->render('home/voyage.html.twig', 
+           
+            ['voyages'=> $voyages ]);
         }
 
 

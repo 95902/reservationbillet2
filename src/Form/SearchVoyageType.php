@@ -22,7 +22,7 @@ class SearchVoyageType extends AbstractType
             ->add('destination', EntityType::class, [
                 'class'=> Destinations ::class,
                 'label'=> false,
-                'required'=> true,
+                'required'=> false,
                 'multiple'=> true,
                 'attr'=>[
                     'class'=>'js-destination-multiple'

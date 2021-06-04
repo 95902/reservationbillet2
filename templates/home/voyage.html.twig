@@ -1,0 +1,46 @@
+
+{% extends "base.html.twig" %}
+
+{% block title %}Voyage {% endblock %}
+
+{% block body %}
+{{ include("partials/title_section.html.twig",{'name':'Recherche Voyage '}) }}
+
+
+
+
+ <section class="featured-places">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading">
+                            {% if  voyages %}
+                            <h2>Votre selection!</h2>
+                             {% endif %}
+                        </div>
+                    </div> 
+                </div> 
+
+                <div class="row">
+
+                {% if not voyages %}
+                        <div class="section-heading">
+                            <h2>Nous n'avons pas touver de voyage correspondant à vos choix !</h2>
+                        </div>
+                {% endif %}
+                
+                    {% for voyage in voyages %}
+                        {{ include("partials/voyage.html.twig",{'voyages':voyages}) }}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+{% endblock body %}

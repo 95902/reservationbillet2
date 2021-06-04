@@ -50,7 +50,7 @@ class VoyagesRepository extends ServiceEntityRepository
        
 
 
-        $query->getQuery()->getResult();
+        return $query->getQuery()->getResult();
 
 
 
