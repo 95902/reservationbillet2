@@ -10,12 +10,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route("/address")
  */
 class AddressController extends AbstractController
 {
+    private $session;
+   
+    public function __construct( SessionInterface $session)
+    {
+        $this->session = $session;
+    }
     /**
      * @Route("/", name="address_index", methods={"GET"})
      */
@@ -68,6 +75,16 @@ class AddressController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+           
+            if($this->session->get('checkout_data'))
+            {
+                $data =$this->session->get('checkout_data');
+                $data['address'] = $address;
+                $this->session->set('checkout_data', $data);
+                return $this->redirectToRoute('checkout_confirm');
+
+            }
+            
             $this->addFlash('address_message','Your address has been edited');
             return $this->redirectToRoute('account');
         }

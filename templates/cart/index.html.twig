@@ -22,10 +22,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                                {% set SubTotal = 0 %}
-                            {% for element in cart %}
+                               
+                            {% for element in cart.voyage %}
                                 <tr>
-                                {% set SubTotal = SubTotal + (element.quantite * element.voyage.prix/100 ) %}
+                                
                             	<td class="product-thumbnail"><a href="#"><img src="/assets/upload/voyages/{{element.voyage.image}}" alt="product1"></a></td>
                                 <td class="product-name" data-title="Product"><a href="#">{{element.voyage.name}}</a></td>
                                 <td class="product-price" data-title="Price">{{element.voyage.prix/100}}</td>
@@ -77,15 +77,15 @@
                             <tbody>
                                 <tr>
                                     <td class="cart_total_label">Cart Subtotal HT</td>
-                                    <td class="cart_total_amount">{{ SubTotal }}</td>
+                                    <td class="cart_total_amount">{{ cart.data.subTotalHt }}</td>
                                 </tr>
                                 <tr>
                                     <td class="cart_total_label">Taxe (20%)</td>
-                                    <td class="cart_total_amount">{{ SubTotal * 0.2 | round(2, 'floor') }}</td>
+                                    <td class="cart_total_amount">{{ cart.data.Taxe}}</td>
                                 </tr>
                                 <tr>
                                     <td class="cart_total_label">Total</td>
-                                    <td class="cart_total_amount"><strong>{{ SubTotal * 1.2 | round(2, 'floor') }}</strong></td>
+                                    <td class="cart_total_amount"><strong>{{cart.data.subTotalTTC }}</strong></td>
                                 </tr>
                             </tbody>
                         </table>
