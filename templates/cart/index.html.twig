@@ -32,7 +32,9 @@
                                 <td class="product-quantity" data-title="Quantity"><div class="quantity">
                                 <a href="{{path('cart_delete',{'id':element.voyage.id})}}" type="button" value="-" class="minus"> - </a>
                                 <input type="text" name="quantity" value="{{element.quantite}}" title="Qty" class="qty" size="4">
+                                {% if element.quantite < element.voyage.quantite %}
                                 <a  href="{{path('cart_add',{'id':element.voyage.id})}}" type="button" value="+" class="plus">+</a>
+                              {% endif %}
                               </div></td>
                               	<td class="product-subtotal" data-title="Total">{{element.quantite * element.voyage.prix/100 }}</td>
                                 <td class="product-remove" data-title="Remove"><a href="{{ path('cart_delete_ALL',{'id':element.voyage.id}) }}"><i class="ti-close"></i></a></td>
