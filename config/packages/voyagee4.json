@@ -1,0 +1,1 @@
+[{"stmt":"SELECT * FROM voyages;","header":["id","name","description","prix","duree","image","is_special_offert","quantite","created_at","tags","slug","maps"],"rows":[["1","marcel bragance","<div>reerr</div>","12200","4","logoh.jpg","0","5","2021-06-04 12:53:55","mom","marcel-bragance","<div>erer</div>"]]}]

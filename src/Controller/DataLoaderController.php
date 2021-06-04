@@ -16,22 +16,22 @@ class DataLoaderController extends AbstractController
      */
     public function index(EntityManagerInterface $manager): Response
     {
-        $file_voyage =dirname(dirname(__DIR__))."/voyages.json";
+        $file_voyage =dirname(dirname(__DIR__))."/voyagee.json";
         $file_destination =dirname(dirname(__DIR__))."/destination.json";
-        $data_voyage= json_decode(file_get_contents($file_voyage))  ;
+        $data_voyage= json_decode(file_get_contents($file_voyage))[0]->rows  ;
         $data_destination= json_decode(file_get_contents($file_destination)) ;
         //   dd($data_voyage);
 
             $destinations = [];
 
-            foreach ($data_destination as $data_destination) 
-            {
-                $destination = new Destinations();
-                $destination->setNomVille($data_destination[1])
-                            ->setNomPays($data_destination[2]);
-                    $manager->persist($destination);
-                $destinations[]=$destination;
-            }
+            // foreach ($data_destination as $data_destination) 
+            // {
+            //     $destination = new Destinations();
+            //     $destination->setNomVille($data_destination[1])
+            //                 ->setNomPays($data_destination[2]);
+            //         $manager->persist($destination);
+            //     $destinations[]=$destination;
+            // }
 
             $voyages = [];
 
@@ -45,7 +45,8 @@ class DataLoaderController extends AbstractController
                     ->setImage($data_voyage[5])
                     ->setIsSpecialOffert($data_voyage[6])
                     ->setQuantite($data_voyage[7])
-                    ->setCreatedAt($data_voyage[8])
+                    ->setMaps($data_voyage[11])
+                    ->setCreatedAt(new \DateTime())
                     ->setTags($data_voyage[9])
                     ->setSlug($data_voyage[10]);
                 $manager->persist($voyage);

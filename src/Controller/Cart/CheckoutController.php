@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Cart;
 
 use App\Form\CheckoutType;
 use App\Services\CartServices;
@@ -83,13 +83,14 @@ class CheckoutController extends AbstractController
          //save panier(cart)
         $cart['checkout'] = $data;
         $reference= $orderServices->saveCart($cart, $user);
-        dd($reference);
+        // dd($reference);
 
 
         return $this->render('checkout/confirm.html.twig',[
             'cart'=> $cart,
             'address' => $address,
             'informations' => $information,
+            'reference'=> $reference,
             'checkout' => $form->createView()
         ]);
       }
